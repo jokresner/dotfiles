@@ -1,0 +1,1 @@
+cargo install --locked nu_plugin_file nu_plugin_gstat nu_plugin_highlight
