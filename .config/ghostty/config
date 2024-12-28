@@ -1,5 +1,4 @@
 font-family = "FiraCode Nerd Font"
 theme = catppuccin-mocha
-title = " "
 macos-titlebar-style = hidden
 window-theme = ghostty
