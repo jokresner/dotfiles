@@ -90,9 +90,7 @@ $env.config.datetime_format.normal = "%d-%m-%Y %H:%M:%S"
 # Filesize Display
 #-----------------
 
-$env.config.filesize.metric = true
-
-$env.config.filesize.format = "auto"
+$env.config.filesize.unit = "metric"
 
 #--------------
 # Hook Settings
