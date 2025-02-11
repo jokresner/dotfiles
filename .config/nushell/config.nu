@@ -119,9 +119,9 @@ use ~/.config/nushell/aliases.nu
 # Load Plugins
 #-------------
 
-#plugin add ~/.cargo/bin/nu_plugin_file
-#plugin add ~/.cargo/bin/nu_plugin_gstat
-#plugin add ~/.cargo/bin/nu_plugin_highlight
+plugin add ~/.cargo/bin/nu_plugin_file
+plugin add ~/.cargo/bin/nu_plugin_gstat
+plugin add ~/.cargo/bin/nu_plugin_highlight
 
 #----------------------
 # External Dependencies
