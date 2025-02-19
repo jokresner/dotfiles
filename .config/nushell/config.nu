@@ -128,3 +128,4 @@ plugin add ~/.cargo/bin/nu_plugin_highlight
 #----------------------
 
 use ~/.cache/starship/init.nu
+use ~/.cache/zoxide/init.nu

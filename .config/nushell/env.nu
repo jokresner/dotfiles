@@ -12,6 +12,10 @@ path add ~/Documents/TinyTeX/bin/universal-darwin/
 mkdir ~/.cache/starship
 starship init nu | save -f ~/.cache/starship/init.nu
 
+# Install Zoxide Config 
+mkdir ~/.cache/zoxide
+zoxide init nushell | save -f ~/.cache/zoxide/init.nu
+
 # Install Carapace Config
 $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense'
 mkdir ~/.cache/carapace
