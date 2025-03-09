@@ -113,7 +113,7 @@ $env.config.hooks = {
 # Loading External Configurations
 #--------------------------------
 
-use ~/.config/nushell/aliases.nu
+source aliases.nu
 
 #-------------
 # Load Plugins
