@@ -109,11 +109,13 @@ $env.config.hooks = {
     }]
 }
 
-#--------------------------------
-# Loading External Configurations
-#--------------------------------
+#------------
+# Alias setup
+#------------
 
-source aliases.nu
+alias ll = ls -l
+alias la = ls -la
+alias lg = lazygit
 
 #-------------
 # Load Plugins
