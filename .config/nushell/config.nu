@@ -129,5 +129,5 @@ alias lg = lazygit
 # External Dependencies
 #----------------------
 
-use ~/.cache/starship/init.nu
-use ~/.cache/zoxide/init.nu
+source ~/.cache/starship/init.nu
+source ~/.cache/zoxide/init.nu
