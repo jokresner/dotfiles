@@ -3,10 +3,9 @@ use std *
 path add ~/.cargo/bin
 path add ~/.local/bin
 path add ~/go/bin
-
 path add /opt/homebrew/bin
 
-path add ~/Documents/TinyTeX/bin/universal-darwin/
+source ~/.config/nushell/env.local.nu
 
 # Install Starship Config
 mkdir ~/.cache/starship
