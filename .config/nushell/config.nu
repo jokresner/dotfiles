@@ -116,6 +116,7 @@ $env.config.hooks = {
 alias ll = ls -l
 alias la = ls -la
 alias lg = lazygit
+alias cocker = docker compose
 
 #-------------
 # Load Plugins
