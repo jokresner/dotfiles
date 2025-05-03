@@ -109,6 +109,19 @@ $env.config.hooks = {
     }]
 }
 
+#-----------
+# Asdf setup
+#-----------
+
+let shims_dir = (
+  if ( $env | get --ignore-errors ASDF_DATA_DIR | is-empty ) {
+    $env.HOME | path join '.asdf'
+  } else {
+    $env.ASDF_DATA_DIR
+  } | path join 'shims'
+)
+$env.PATH = ( $env.PATH | split row (char esep) | where { |p| $p != $shims_dir } | prepend $shims_dir )
+
 #------------
 # Alias setup
 #------------
@@ -118,14 +131,7 @@ alias la = ls -la
 alias lg = lazygit
 alias cocker = docker compose
 alias ff = fastfetch
-
-#-------------
-# Load Plugins
-#-------------
-
-#plugin add ~/.cargo/bin/nu_plugin_file
-#plugin add ~/.cargo/bin/nu_plugin_gstat
-#plugin add ~/.cargo/bin/nu_plugin_highlight
+alias lj = lazyjj
 
 #----------------------
 # External Dependencies
