@@ -8,11 +8,7 @@ if ($nu.os-info.name == 'macos') {
 	path add /opt/homebrew/bin
 }
 
-const local_env = '~/.config/nushell/env.local.nu' | path expand
-if ($local_env | path exists) {
-	source $local_env
-}
-
+# load plugins
 mkdir ~/.cache/starship
 starship init nu | save -f ~/.cache/starship/init.nu
 

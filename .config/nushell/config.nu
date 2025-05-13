@@ -134,6 +134,12 @@ alias ff = fastfetch
 alias lj = lazyjj
 
 #----------------------
+# Environment Variables
+#----------------------
+
+$env.GPG_TTY = (tty)
+
+#----------------------
 # External Dependencies
 #----------------------
 
