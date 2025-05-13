@@ -110,7 +110,7 @@ $env.config.hooks = {
 }
 
 #-----------
-# Asdf setup
+# Asdf Shims
 #-----------
 
 let shims_dir = (
