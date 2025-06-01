@@ -138,10 +138,12 @@ alias lj = lazyjj
 #----------------------
 
 $env.GPG_TTY = (tty)
+$env.EDITOR = "nvim"
 
 #----------------------
 # External Dependencies
 #----------------------
 
+source ~/.config/nushell/ssh-agent.nu
 source ~/.cache/starship/init.nu
 source ~/.cache/zoxide/init.nu
