@@ -1,55 +1,70 @@
+@import './catppuccin.css';
+
 * {
-	font-family: "Hack", monospace;
-}
+    font-family: 'Rubik', 'FiraCode Nerd Font';
+    font-size: 14px;
+ }
 
-window {
-	background-color: transparent;
-}
+ /* Window */
+ window {
+    margin: 0px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: @bg;
+ }
 
-#input {
-	margin: 5px;
-  border: 1px #626880;
-  border-style: solid;
-	border-radius: 10px;
-	background-color: #303446;
-	color: #c6d0f5;
-  outline-color: #303446;
-}
+ /* Inner Box */
+ #inner-box {
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: @bg;
+ }
 
-#input:focus {
-  box-shadow: rgba(239, 159, 118, 0.4) 0px 0px 0px 2px, rgba(239, 159, 118, 0.65) 0px 4px 6px -1px, rgba(239, 159, 118, 0.08) 0px 1px 0px inset;
-}
+ /* Outer Box */
+ #outer-box {
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    background-color: @bg;
+    border-radius: 5px;
+ }
 
-/* #inner-box { */
-/* 	background-color: #303446; */
-/* } */
+ /* Scroll */
+ #scroll {
+    margin: 0px;
+    padding: 10px;
+    border: none;
+ }
 
-#outer-box {
-	margin: 2px;
-	padding: 10px;
-  border: 1px #626880;
-  border-style: solid;
-  border-radius: 20px;
-	background-color: #303446;
-}
+ /* Input */
+ #input {
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    color: @accent;
+    background-color: @bg;
+    border: 2px solid @accent;
+ }
 
-#scroll {
-	margin: 5px;
-}
+ /* Text */
+ #text {
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    color: @txt;
+ }
 
-#text {
-	padding: 4px;
-	color: #c6d0f5;
-}
+ /* Selected Entry */
+ #entry:selected {
+   background-color: @bg;
+   outline: 1px solid @accent;
+ }
 
-#entry:nth-child(even){
-	background-color: #3C4053;
-}
-
-#entry:selected {
-	background-color: #626880;
-}
-
-#text:selected {
-	background: transparent;
-}
+ #entry:selected #text {
+    color: @txt;
+ }
+ image {
+   margin-left: 10px;
+ }

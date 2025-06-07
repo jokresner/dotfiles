@@ -1,30 +1,29 @@
 {
-        "layer": "top",
-        "position": "top",
-        "reload_style_on_change": true,
-        "modules-left": ["custom/notification","clock","custom/pacman","tray"],
-        "modules-center": ["hyprland/workspaces"],
-        "modules-right": ["cpu","memory","temperature","bluetooth","network","battery", "custom/spacer"],
-
-        "hyprland/workspaces": {
-            "format": "{icon}",
-            "format-icons": {
-                "active": "",
-                "default": "",
-                "empty": ""
-            },
-            "persistent-workspaces": {
-                "*": [ 1,2,3,4,5 ]
-            }
+	"layer": "top",
+    "position": "top",
+    "reload_style_on_change": true,
+    "modules-left": ["custom/notification","clock","custom/pacman","tray"],
+    "modules-center": ["hyprland/workspaces"],
+    "modules-right": ["cpu","memory","temperature","bluetooth","network","battery", "custom/spacer"],
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "active": "",
+            "default": "",
+            "empty": ""
         },
-        "custom/notification": {
-            "tooltip": false,
-            "format": "",
-            "on-click": "swaync-client -t -sw",
-            "escape": true
-        },
-        "clock": {
-            "format": "{:%H:%M:%S} ",
+        "persistent-workspaces": {
+            "*": [ 1,2,3,4,5 ]
+        }
+    },
+    "custom/notification": {
+        "tooltip": false,
+        "format": "",
+        "on-click": "swaync-client -t -sw",
+        "escape": true
+    },
+    "clock": {
+    	"format": "{:%H:%M:%S} ",
             "interval": 1,   
             "tooltip-format": "<tt>{calendar}</tt>",
             "calendar": {
@@ -56,7 +55,7 @@
             "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
             "tooltip-format-enumerate-connected": "{device_alias}\n{device_address}",
             "tooltip-format-enumerate-connected-battery": "{device_alias}\n{device_address}\n{device_battery_percentage}%",
-            "on-click-right": "blueman-manager",
+            "on-click-right": "blueman-manager"
         }, 
         "battery": {
             "interval":30,
@@ -76,7 +75,7 @@
             "󰂀",
             "󰂂",
             "󰁹"
-            ],
+            ]
         },
         "custom/pacman": {
             "format": "󰅢 {}",
@@ -85,22 +84,22 @@
             "exec-if": "exit 0",
             "on-click": "kitty sh -c 'yay -Syu; echo Done - Press enter to exit; read'; pkill -SIGRTMIN+8 waybar",
             "signal": 8,
-            "tooltip": false,
+            "tooltip": false
         },
         "cpu": {
             "format": "󰻠 {usage}%",
             "tooltip": true
         },
         "memory": {
-            "format": " {used}GB",
+            "format": " {used}GB"
         },
         "temperature": {
             "critical-threshold": 80,
             "format": " {}°C",
-			"hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+			"hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input"
         },
         "tray": {
             "icon-size": 14,
             "spacing": 10
-        },
+        }
 }

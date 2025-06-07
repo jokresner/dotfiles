@@ -1,0 +1,5 @@
+term=ghostty
+location=center
+prompt= Search
+normal_window=true
+hide_scrolle=true
