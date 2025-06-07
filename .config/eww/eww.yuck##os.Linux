@@ -1,0 +1,27 @@
+(include "eww_widgets.yuck")
+
+(defwindow userinfo
+  :monitor '[0]'
+  :stacking "bg"
+  :namespace "eww"
+  :geometry (geometry
+    :x "50"
+    :y "170"
+    :width "100"
+    :height "100"
+    :anchor "bottom right")
+  (userinfobox)
+)
+
+(defwindow powermenu
+  :monitor '[0]'
+  :stacking "bg"
+  :namespace "eww"
+  :geometry (geometry
+    :x "50"
+    :y "170"
+    :width "100"
+    :height "100"
+    :anchor "bottom right")
+  (powermenu)
+)
