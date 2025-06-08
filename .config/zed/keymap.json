@@ -9,13 +9,26 @@
   {
     "context": "Workspace",
     "bindings": {
-      // "shift shift": "file_finder::Toggle"
+      "spcae space": "file_finder::Toggle"
     }
   },
   {
     "context": "Editor",
     "bindings": {
-      // "j k": ["workspace::SendKeystrokes", "escape"]
+      "ctrl u": ["workspace::SendKeystrokes", "ctrl u z z"],
+      "ctrl d": ["workspace::SendKeystrokes", "ctrl d z z"]
+      //"space space": "file_finder::Toggle",
+      //"space e": "project_panel::ToggleFocus",
+      //"space f f": "workspace::OpenFiles",
+      //"space f g": "git_panel::ToggleFocus",
+      //"g d": "editor::GoToDefinition",
+      //"g D": "editor::GoToDeclaration",
+      //"g r": "editor::FindAllReferences",
+      //"g i": "editor::GoToImplementation",
+      //"space s s": "project_symbols::Toggle",
+      //"c a": "editor::ToggleCodeActions",
+      //"c r": "editor::Rename",
+      //"space a a": "agent::ToggleFocus"
     }
   }
 ]
