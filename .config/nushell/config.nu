@@ -132,18 +132,19 @@ alias lg = lazygit
 alias cocker = docker compose
 alias ff = fastfetch
 alias lj = lazyjj
+alias vi = nvim
+alias vim = nvim
+alias v = nvim
 
 #----------------------
 # Environment Variables
 #----------------------
 
 $env.GPG_TTY = (tty)
-$env.EDITOR = "nvim"
 
 #----------------------
 # External Dependencies
 #----------------------
 
-source ~/.config/nushell/ssh-agent.nu
 source ~/.cache/starship/init.nu
 source ~/.cache/zoxide/init.nu
