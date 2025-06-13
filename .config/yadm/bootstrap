@@ -1,1 +1,34 @@
-#cargo install --locked --force nu_plugin_file nu_plugin_gstat nu_plugin_highlight
+#!/bin/sh
+
+set -e
+
+# Detect package manager
+if command -v brew >/dev/null 2>&1; then
+	PM="brew"
+elif command -v apt >/dev/null 2>&1; then
+	PM="apt"
+elif command -v paru >/dev/null 2>&1; then
+	PM="paru"
+else
+	echo "No supported package manager found."
+	exit 1
+fi
+
+install_pkg() {
+	case "$PM" in
+		brew)
+			brew install "$@"
+			;;
+		apt)
+			sudo apt update
+			sudo apt install -y "$@"
+			;;
+		paru)
+			paru -S --noconfirm "$@"
+			;;
+	esac
+}
+
+install_pkg git curl wget neovim ripgrep fd nushell starship zoxide bat exa
+
+install_pkg lazygit fastfetch atuin tmux
