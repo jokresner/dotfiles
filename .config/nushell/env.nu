@@ -18,3 +18,6 @@ zoxide init nushell | save -f ~/.cache/zoxide/init.nu
 $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense'
 mkdir ~/.cache/carapace
 carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
+
+mkdir ~/.cache/atuin
+atuin init nu | save --force ~/.cache/atuin/init.nu

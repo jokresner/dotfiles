@@ -135,12 +135,15 @@ alias lj = lazyjj
 alias vi = nvim
 alias vim = nvim
 alias v = nvim
+alias t = task
 
 #----------------------
 # Environment Variables
 #----------------------
 
+$env.GCM_CREDENTIAL_STORE = "gpg"
 $env.GPG_TTY = (tty)
+$env.EDITOR = "nvim"
 
 #----------------------
 # External Dependencies
@@ -148,3 +151,4 @@ $env.GPG_TTY = (tty)
 
 source ~/.cache/starship/init.nu
 source ~/.cache/zoxide/init.nu
+source ~/.cache/atuin/init.nu
