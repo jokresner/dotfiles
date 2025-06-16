@@ -29,6 +29,6 @@ install_pkg() {
 	esac
 }
 
-install_pkg git curl wget neovim ripgrep fd nushell starship zoxide bat exa
+install_pkg git curl wget neovim ripgrep fd nushell starship zoxide bat eza
 
 install_pkg lazygit fastfetch atuin tmux
