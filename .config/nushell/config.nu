@@ -129,6 +129,7 @@ $env.PATH = ( $env.PATH | split row (char esep) | where { |p| $p != $shims_dir }
 alias ll = ls -l
 alias la = ls -la
 alias lg = lazygit
+alias yl = lazygit --git-dir ~/.local/share/yadm/repo.git --work-tree ~
 alias cocker = docker compose
 alias ff = fastfetch
 alias lj = lazyjj
