@@ -1,0 +1,26 @@
+{
+	"mcpServers": {
+		"github.com/modelcontextprotocol/servers/tree/main/src/git": {
+			"command": "uvx",
+			"args": ["mcp-server-git"]
+		},
+		"github.com/upstash/context7-mcp": {
+			"command": "pnpx",
+			"args": ["@upstash/context7-mcp"]
+		},
+		"searxng": {
+			"disabled": false,
+			"env": {
+				"SEARXNG_URL": "https://search.jokresner.de"
+			},
+			"autoApprove": ["search"],
+			"command": "uvx",
+			"args": ["mcp-searxng"]
+		},
+		"mcp-mermaid": {
+			"command": "pnpx",
+			"args": ["mcp-mermaid"]
+		}
+	},
+	"nativeMCPServers": []
+}
