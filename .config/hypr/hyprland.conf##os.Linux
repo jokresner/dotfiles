@@ -28,7 +28,7 @@ $clipboard = nwg-clipman
 # Autostart necessary processes (like notifications daemons, status bars, etc.)
 # Or execute your favorite apps at launch like this:
 
-exec-once = waybar & hyprpaper & hypridle & nextcloud
+exec-once = waybar & hyprpaper & hypridle
 exec-once = wl-paste --watch cliphist store
 exec-once = systemctl --user start hyprpolkitagent
 
@@ -188,7 +188,7 @@ $mainMod = SUPER # Sets "Windows" key as main modifier
 # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
 bind = $mainMod, Return, exec, $terminal
 bind = $mainMod, Q, killactive,
-bind = $mainMod, M, exec, wlogout
+bind = $mainMod, M, exec, eww open powermenu
 bind = $mainMod, E, exec, $fileManager
 bind = $mainMod, H, togglefloating,
 bind = $mainMod, Space, exec, $menu
@@ -266,6 +266,7 @@ bindl = , XF86AudioPrev, exec, playerctl previous
 
 # Ignore maximize requests from apps. You'll probably like this.
 windowrule = suppressevent maximize, class:.*
+windowrule = suppressevent fullscreen, class:.*
 
 # Fix some dragging issues with XWayland
 windowrule = nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0
