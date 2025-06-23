@@ -31,4 +31,4 @@ install_pkg() {
 
 install_pkg git curl wget neovim ripgrep fd nushell starship zoxide bat eza
 
-install_pkg lazygit fastfetch atuin tmux unp
+install_pkg lazygit fastfetch atuin zellij unp carapace
