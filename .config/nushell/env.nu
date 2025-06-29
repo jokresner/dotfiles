@@ -6,6 +6,7 @@ path add ~/go/bin
 
 if ($nu.os-info.name == 'macos') {
 	path add /opt/homebrew/bin
+	path add ~/.rustup/toolchains/nightly-aarch64-apple-darwin/bin
 }
 
 # load plugins
@@ -24,3 +25,4 @@ atuin init nu | save --force ~/.cache/atuin/init.nu
 
 $env.PNPM_HOME = "~/.local/share/pnpm"
 $env.PATH = ($env.PATH | split row (char esep) | prepend $env.PNPM_HOME )
+path add $env.PNPM_HOME
