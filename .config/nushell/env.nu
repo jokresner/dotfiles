@@ -23,5 +23,5 @@ carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
 mkdir ~/.cache/atuin
 atuin init nu | save --force ~/.cache/atuin/init.nu
 
-$env.PNPM_HOME = "~/.local/share/pnpm"
+$env.PNPM_HOME = $env.HOME + '/.local/share/pnpm'
 $env.PATH = ($env.PATH | split row (char esep) | prepend $env.PNPM_HOME )
