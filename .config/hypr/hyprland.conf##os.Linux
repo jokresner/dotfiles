@@ -29,7 +29,7 @@ $powermenu = caelestia shell drawers toggle session
 # Autostart necessary processes (like notifications daemons, status bars, etc.)
 # Or execute your favorite apps at launch like this:
 
-exec-once = caelestia shell -d & hypridle & hyprpaper & trayscale
+exec-once = caelestia shell -d & hypridle & hyprpaper & trayscale & nextcloud
 exec-once = wl-paste --watch cliphist store
 exec-once = systemctl --user start hyprpolkitagent
 
