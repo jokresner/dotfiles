@@ -275,10 +275,10 @@ plugins {
     strider location="zellij:strider"
     tab-bar location="zellij:tab-bar"
     welcome-screen location="zellij:session-manager" {
-        welcome_screen true
+        welcome_screen false
     }
 	autolock location="file:~/.config/zellij/plugins/zellij-autolock.wasm" {
-		triggers "nvim|vim|v"
+		triggers "nvim|vim|v|opencode"
 		watch_triggers "zoxide|atuin"
 		watch_interval "1.0"
 	}

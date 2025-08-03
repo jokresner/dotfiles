@@ -35,6 +35,35 @@ $env.config.completions.partial = true
 
 $env.config.completions.use_ls_colors = true
 
+let external_completer = {|spans|
+	let carapace_completer = {|spans|
+		carapace $spans.0 nushell ...$spans
+		| from json
+		| if ($in | default [] | where value == $"($spans | last)ERR" | is-empty) { $in } else { null }
+	}
+	let zoxide_completer = {|spans|
+		$spans | skip 1 | zoxide query -l $in | lines | where {|x| $x != $env.PWD}
+	}
+
+	let expanded_alias = scope aliases | where name == $spans.0 | get -o 0 | get -o expansion
+	let spans = if $expanded_alias != null  {
+		$spans | skip 1 | prepend ($expanded_alias | split row " " | take 1)
+	} else {
+		$spans
+	}
+
+	match $spans.0 {
+		__zoxide_z | __zoxide_zi => $zoxide_completer,
+		_ => $carapace_completer
+	} | do $in $spans
+}
+
+$env.config.completions.external = {
+    enable: true,
+    max_results: 50,
+    completer: $external_completer
+}
+
 #---------------------
 # External Completions
 #---------------------
@@ -85,7 +114,7 @@ $env.config.hooks = {
 #-----------
 
 let shims_dir = (
-  if ( $env | get --optional ASDF_DATA_DIR | is-empty ) {
+  if ( $env | get -o ASDF_DATA_DIR | is-empty ) {
     $env.HOME | path join '.asdf'
   } else {
     $env.ASDF_DATA_DIR
@@ -107,7 +136,12 @@ alias lj = lazyjj
 alias vi = nvim
 alias vim = nvim
 alias v = nvim
-alias t = task
+alias t = go tool task
+
+if ($nu.os-info.name == 'macos') {
+	echo "macOS detected, setting up macOS specific aliases"
+	alias tailscale = /Applications/Tailscale.app/Contents/MacOS/Tailscale
+}
 
 #----------------------
 # Environment Variables
