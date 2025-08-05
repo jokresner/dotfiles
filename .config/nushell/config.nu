@@ -137,6 +137,7 @@ alias vi = nvim
 alias vim = nvim
 alias v = nvim
 alias t = go tool task
+alias ag = ast-grep
 
 if ($nu.os-info.name == 'macos') {
 	echo "macOS detected, setting up macOS specific aliases"
