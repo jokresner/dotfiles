@@ -1,4 +1,20 @@
 {
+  "context_servers": {
+    "mcp-server-context7": {
+      "source": "extension",
+      "enabled": true,
+      "settings": {
+        "default_minimum_tokens": "10000"
+      }
+    }
+  },
+  "agent": {
+    "use_modifier_to_send": true,
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gemini-2.5-pro"
+    }
+  },
   "git_panel": {
     "dock": "right"
   },
@@ -43,5 +59,12 @@
   "inlay_hints": {
     "enabled": true
   },
-  "file_scan_exclusions": ["**/.git", "**/.DS_Store", "**/node_modules"]
+  "file_scan_exclusions": ["**/.git", "**/.DS_Store", "**/node_modules"],
+  "lsp": {
+    "gopls": {
+      "initialization_options": {
+        "buildFlags": ["-tags=integration,wireinject"]
+      }
+    }
+  }
 }

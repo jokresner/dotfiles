@@ -3,6 +3,7 @@ use std *
 path add ~/.cargo/bin
 path add ~/.local/bin
 path add ~/go/bin
+path add ~/.local/share/bob/nvim-bin
 
 if ($nu.os-info.name == 'macos') {
 	path add /opt/homebrew/bin

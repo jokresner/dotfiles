@@ -154,7 +154,6 @@ if ( which task | is-empty ) {
 }
 
 if ($nu.os-info.name == 'macos') {
-	echo "macOS detected, setting up macOS specific aliases"
 	alias tailscale = /Applications/Tailscale.app/Contents/MacOS/Tailscale
 }
 
