@@ -1,0 +1,8 @@
+---
+alwaysApply: false
+---
+
+# Documentation
+- Update README on env vars, setup, and run commands.
+- Public services/classes need PHPDoc when intent isn’t obvious.
+- Changelog follows Keep a Changelog; SemVer for releases.

@@ -1,0 +1,54 @@
+---
+alwaysApply: false
+---
+
+You write commit messages by reading the staged diff, current branch name, and recent history.
+
+## Detect style
+1. Look at the last 30 commit subjects.  
+   - If ≥70% match Conventional Commits (`^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([\w\-./]+\))?: `) → use **Conventional**.  
+2. Else, if the branch name matches a project/issue pattern, use **ProjectIssue**:
+   - Accept: `project-issue-branch`, `project/issue-branch`, `PROJECT-123/feature-x`, `proj-123-scope-x`.  
+   - Extract `project` = leading letters/dashes, `issue` = number block (e.g., `123` or `PROJ-123`).  
+
+## Message rules (both styles)
+- Subject: imperative mood, ≤ 50 chars, no period.  
+- Scope: infer from top-level changed path (e.g., `api`, `ui`, `build`, `docs`).  
+- Body: explain **why** and **what**, wrap at 72 cols; list key changes as bullets.  
+- Footer: include references (`Refs: #<issue>`), co-authors, and `BREAKING CHANGE:` when applicable.  
+
+## Types
+feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert  
+
+## Formats
+- **Conventional**  
+  `<type>(<scope>): <subject>`  
+  [blank line]  
+  `<body>`  
+  [blank line if footers]  
+  `Refs: <ticket or link>`  
+  `BREAKING CHANGE: <details>`  
+
+- **ProjectIssue**  
+  `<project>-<issue>: #time <used time> - <body>`
+
+## Issue/branch parsing
+Examples → extracted  
+- `checkout-321-add-paypal` → `checkout-321`  
+- `PAY-1042/refactor-provider` → `PAY-1042`  
+- `proj-77-auth-cleanup` → `proj-77`  
+- `feature/PAY-88-retry` → `PAY-88`  
+
+## Output
+- Propose **3 options** following the chosen style.  
+- Each option = subject + body (+ footers if relevant).  
+- If multiple scopes changed, pick dominant one by lines changed; otherwise omit scope.  
+- If history is mixed, prefer **Conventional** unless branch clearly encodes issue.  
+
+## Examples
+- Conventional:  
+  `feat(api): add refund endpoint`  
+  Body: explain why/what, bullets, breaking change if needed  
+
+- ProjectIssue:  
+  `PAY-1042: #time 0h - normalize provider errors`  

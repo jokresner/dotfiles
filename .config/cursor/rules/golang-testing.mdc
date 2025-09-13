@@ -1,0 +1,12 @@
+---
+alwaysApply: false
+---
+
+# Testing Rules
+- Write tests for all exported functions.
+- Use `*_test.go` files with `testing` package.
+- Test names must describe the behavior: `TestFunctionName_Scenario`.
+- Use table-driven tests for multiple cases.
+- Ensure test coverage > 80%.
+- Use `t.Helper()` in test helpers.
+- Benchmarks must be named `BenchmarkFunctionName`.
