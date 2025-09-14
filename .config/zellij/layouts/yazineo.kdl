@@ -1,0 +1,71 @@
+layout {
+  default_tab_template {
+    children
+    pane size=1 borderless=true {
+      plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
+        // ---------- Catppuccin Mocha palette (aliases) ----------
+        color_base   "#1e1e2e" // base
+        color_mantle "#181825" // mantle
+        color_crust  "#11111b" // crust
+        color_text   "#cdd6f4" // text
+        color_dim    "#a6adc8" // subtext0
+        color_ol0    "#6c7086" // overlay0
+        color_surf0  "#313244" // surface0
+        color_blue   "#89b4fa" // blue (accent)
+        color_sapph  "#74c7ec" // sapphire (alt accent)
+
+        // ---------- layout & spacing ----------
+        format_left   "{mode} #[fg=$dim]{session}"
+        format_center "{tabs}"
+        format_right  "{command_git_branch} #[fg=$dim]{datetime}"
+        format_space  "#[bg=$mantle] "
+
+        // ---------- subtle top border to separate from panes ----------
+        border_enabled  "true"
+        border_char     "─"
+        border_format   "#[fg=$surf0]"
+        border_position "top"
+
+        // ---------- tidy frames ----------
+        hide_frame_for_single_pane "true"
+
+        // ---------- modes ----------
+        mode_normal "#[bg=$blue] "
+        mode_tmux   "#[bg=$sapph] "
+        mode_default_to_mode "tmux"
+
+        // ---------- tabs ----------
+        tab_normal "#[fg=$dim] {name} "
+        tab_active "#[fg=$text,bold] {name} "
+
+        // ---------- git ----------
+        command_git_branch_command  "git rev-parse --abbrev-ref HEAD"
+        command_git_branch_format   "#[fg=$blue] {stdout} "
+        command_git_branch_interval "10"
+        command_git_branch_rendermode "static"
+
+        // ---------- clock ----------
+        datetime          "#[fg=$dim]{format} "
+        datetime_format   "%H:%M · %d %b"
+        datetime_timezone "Europe/Berlin"
+      }
+    }
+  }
+
+  tab name="cli" {
+    pane {
+      command "nu" 
+    }
+  }
+
+  tab name="yazineo" {
+        pane split_direction="vertical" {
+          pane name="yazi" {
+            command "yazi" 
+          }
+          pane name="nvim" {
+            command "nvim" 
+          }
+        }
+  }
+}

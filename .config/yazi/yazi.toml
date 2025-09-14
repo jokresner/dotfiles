@@ -4,3 +4,8 @@ show_symlink = true
 
 [preview]
 wrap = "yes"
+
+[opener]
+edit = [
+  { run = 'NVIM_LISTEN_ADDRESS=/tmp/nvim.sock nvr --remote-tab-silent "$@"', desc = "Edit in Neovim", block = false, for = "unix" }
+]
