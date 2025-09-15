@@ -1,25 +1,3 @@
-// ========================================
-// USER ZELLIJ CONFIGURATION TEMPLATE
-// ========================================
-// This is a template file with documentation and examples.
-// 
-// To customize Zellij:
-// 1. Copy this directory: cp -r configs/zellij/user configs/zellij/personal
-// 2. Edit files in configs/zellij/personal/ to customize your settings
-// 3. Your personal configs are git ignored - no conflicts on updates!
-//
-// Configuration layers (in order of precedence):
-//   1. Zellij defaults (from `zellij setup --dump-config`)
-//   2. Yazelix overrides (yazelix_overrides.kdl) 
-//   3. Your settings (personal/user_config.kdl) - HIGHEST PRIORITY
-//
-// IMPORTANT: Merging uses simple concatenation. Zellij uses the last occurrence
-// of any setting. For nested blocks (ui, keybinds, themes), avoid duplicates
-// by overriding the entire section rather than adding partial blocks.
-//
-// Documentation: https://zellij.dev/documentation/
-// ========================================
-
 // === THEME AND UI ===
 theme "catppuccin-mocha"
 
@@ -98,12 +76,42 @@ load_plugins {
     "~/.config/zellij/plugins/zsm.wasm"
 }
 
+plugins {
+	tab-bar location="zellij:tab-bar"
+    status-bar location="zellij:status-bar"
+    strider location="zellij:strider"
+    compact-bar location="zellij:compact-bar"
+    session-manager location="zellij:session-manager"
+    welcome-screen location="zellij:session-manager" {
+        welcome_screen true
+    }
+    filepicker location="zellij:strider" {
+        cwd "/"
+    }
+    configuration location="zellij:configuration"
+    plugin-manager location="zellij:plugin-manager"
+    about location="zellij:about"
+
+	zjstatus location="file:~/.config/zellij/plugins/zjstatus.wasm"
+	zellij-forgot location="file:~/.config/zellij/plugins/zellij_forgot.wasm" {
+		"LOAD_ZELLIJ_BINDINGS" "true"
+	}
+	room location="file:~/.config/zellij/plugins/room.wasm"
+	zsm location="file:~/.config/zellij/plugins/zsm.wasm" {
+		default_layout "development"
+		show_resurrectable_sessions true
+	}
+
+	zjstatus location="file:~/.config/zellij/plugins/zjstatus.wasm"
+}
+
+
 // ========================================
 // ADVANCED CONFIGURATION
 // ========================================
 
 // === LAYOUT SETTINGS ===
-default_layout "yazineo"
+default_layout "terminal"
 
 // Disable automatic layout management
 // auto_layout false

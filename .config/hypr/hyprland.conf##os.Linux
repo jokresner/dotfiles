@@ -167,7 +167,7 @@ input {
 
 # https://wiki.hyprland.org/Configuring/Variables/#gestures
 gestures {
-    workspace_swipe = true
+    #workspace_swipe = true
 }
 
 # Example per-device config
@@ -291,13 +291,12 @@ bindm = $mainMod, mouse:273, resizewindow
 # Example windowrule
 # windowrule = float,class:^(kitty)$,title:^(kitty)$
 
-# Ignore maximize requests from apps. You'll probably like this.
-windowrule = suppressevent maximize, class:.*
-windowrule = suppressevent fullscreen, class:.*
-
-windowrule = nofocus, class:Vivaldi, floating:1, fullscreen:1, pinned:0
-
 windowrule = float,class:ghostty, titiel:Ghostty
+windowrule = idleinhibit fullscreen, fullscreen:1
+
+# Ignore maximize requests from apps. You'll probably like this.
+#windowrule = suppressevent maximize, class:.*
+#windowrule = suppressevent fullscreen, class:.*
 
 # Fix some dragging issues with XWayland
 windowrule = nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0
