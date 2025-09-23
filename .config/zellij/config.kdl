@@ -51,7 +51,7 @@ keybinds {
 }
 
 // === COPY/PASTE BEHAVIOR ===
-// Automatically copy selection when releasing mouse (default: true) 
+// Automatically copy selection when releasing mouse (default: true)
 copy_on_select true
 
 // copy_command "xclip -selection clipboard"  // For X11
@@ -111,7 +111,7 @@ plugins {
 // ========================================
 
 // === LAYOUT SETTINGS ===
-default_layout "terminal"
+default_layout "default"
 
 // Disable automatic layout management
 // auto_layout false
