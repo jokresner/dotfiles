@@ -4,9 +4,10 @@ path add ~/.cargo/bin
 path add ~/.local/bin
 path add ~/go/bin
 path add ~/.local/share/bob/nvim-bin
+path add /run/current-system/sw/bin
 
 if ($nu.os-info.name == 'macos') {
-	path add /opt/homebrew/bin
+	#path add /opt/homebrew/bin
 	path add ~/.rustup/toolchains/nightly-aarch64-apple-darwin/bin
 }
 
@@ -26,3 +27,4 @@ atuin init nu | save --force ~/.cache/atuin/init.nu
 
 $env.PNPM_HOME = $env.HOME + '/.local/share/pnpm'
 $env.PATH = ($env.PATH | split row (char esep) | prepend $env.PNPM_HOME )
+
