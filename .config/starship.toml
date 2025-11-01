@@ -5,6 +5,7 @@ palette = "catppuccin_mocha"
 add_newline = false
 
 format = """
+$nix_shell\
 $directory\
 ${custom.git}\
 ${custom.jj}\

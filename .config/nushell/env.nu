@@ -7,9 +7,12 @@ path add ~/.local/share/bob/nvim-bin
 path add /run/current-system/sw/bin
 
 if ($nu.os-info.name == 'macos') {
-	#path add /opt/homebrew/bin
+	path add /opt/homebrew/bin
 	path add ~/.rustup/toolchains/nightly-aarch64-apple-darwin/bin
+	$env.SHELL = 'nu'
 }
+
+$env.XDG_RUNTIME_DIR = "/tmp/"
 
 # load plugins
 mkdir ~/.cache/starship

@@ -13,8 +13,10 @@
     darwin-configuration = { pkgs, ... }: {
 	  nixpkgs.config.allowUnfree = true;
 
+	  nix.enable = false;
+
       environment.systemPackages =
-        [ pkgs.neovim pkgs.nushell
+        [ pkgs.neovim pkgs.nushell pkgs.home-manager
         ];
 
 	  homebrew = {

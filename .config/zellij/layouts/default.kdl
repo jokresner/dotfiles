@@ -54,5 +54,7 @@ layout {
         datetime_timezone "Europe/Berlin"
       }
     }
-  pane
+  pane {
+	  command "nu"
+  }
   }

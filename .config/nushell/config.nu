@@ -177,7 +177,15 @@ source ~/.cache/atuin/init.nu
 # Nix Setup
 #----------
 
-load-env (open /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh | capture-foreign-env err> /dev/null)
+if ($nu.os-info.name == 'macos') {
+  load-env (open /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh | capture-foreign-env err> /dev/null)
+}
+
+#------
+# Hooks
+#------
+
+source ~/.config/nushell/hooks/direnv.nu
 
 #----------
 # Functions

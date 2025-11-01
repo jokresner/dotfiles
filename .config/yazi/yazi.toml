@@ -7,5 +7,5 @@ wrap = "yes"
 
 [opener]
 edit = [
-  { run = 'NVIM_LISTEN_ADDRESS=/tmp/nvim.sock nvr --remote-tab-silent "$@"', desc = "Edit in Neovim", block = false, for = "unix" }
+  { run = 'nvim "$@"', desc = "Edit in Neovim", block = true, for = "unix" }
 ]
