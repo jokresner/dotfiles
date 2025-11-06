@@ -5,4 +5,4 @@ keychain --eval --quiet ...(ls ~/.ssh | where name !~ '.pub$' and name !~ 'known
     | select k v
     | transpose --header-row
     | into record
-    | load-env
+   | load-env
