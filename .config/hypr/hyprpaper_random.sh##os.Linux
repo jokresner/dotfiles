@@ -1,10 +1,20 @@
 #!/usr/bin/env bash
 
 WALLPAPER_DIR="$HOME/Nextcloud/Wallpaper/"
-CURRENT_WALL=$(hyprctl hyprpaper listloaded)
 
-# Get a random wallpaper that is not the current one
-WALLPAPER=$(find "$WALLPAPER_DIR" -type f ! -name "$(basename "$CURRENT_WALL")" | shuf -n 1)
+# Get all monitor names
+MONITORS=($(hyprctl monitors -j | jq -r '.[].name'))
 
-# Apply the selected wallpaper
-hyprctl hyprpaper reload ,"$WALLPAPER"
+# Get all wallpapers
+WALLPAPERS=($(find "$WALLPAPER_DIR" -type f))
+
+# Assign a random wallpaper to each monitor
+for MONITOR in "${MONITORS[@]}"; do
+    # Randomly select a wallpaper index
+    RANDOM_INDEX=$((RANDOM % ${#WALLPAPERS[@]}))
+    WALLPAPER="${WALLPAPERS[$RANDOM_INDEX]}"
+    
+    # Preload and apply wallpaper to this monitor
+    hyprctl hyprpaper preload "$WALLPAPER" > /dev/null 2>&1
+    hyprctl hyprpaper wallpaper "$MONITOR,$WALLPAPER" > /dev/null 2>&1
+done

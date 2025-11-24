@@ -6,14 +6,15 @@ path add ~/go/bin
 path add ~/.local/share/bob/nvim-bin
 path add /run/current-system/sw/bin
 
+$env.SHELL = '/usr/bin/nu'
+
 if ($nu.os-info.name == 'macos') {
 	path add /opt/homebrew/bin
     path add ~/.orbstack/bin
 	path add ~/.rustup/toolchains/nightly-aarch64-apple-darwin/bin
 	$env.SHELL = '/opt/homebrew/bin/nu'
+    $env.XDG_RUNTIME_DIR = "/tmp/"
 }
-
-$env.XDG_RUNTIME_DIR = "/tmp/"
 
 # load plugins
 mkdir ~/.cache/starship

@@ -1,18 +1,29 @@
 {
   "context_servers": {
+    "anytype": {
+      "source": "custom",
+      "enabled": true,
+      "command": "pnpx",
+      "args": [
+        "@anyproto/anytype-mcp"
+      ],
+      "env": {
+        "OPENAPI_MCP_HEADERS": "{\"Authorization\":\"Bearer ZF1ICBPp7AJgLUEKD/MZvPEw8T9YrbqvnY0m0S5kNI8=\", \"Anytype-Version\":\"2025-05-20\"}"
+      }
+    },
     "mcp-server-context7": {
       "source": "extension",
       "enabled": true,
       "settings": {
-        "default_minimum_tokens": "10000"
-      }
+                "context7_api_key": ""
+            }
     }
   },
   "agent": {
     "use_modifier_to_send": true,
     "default_model": {
       "provider": "copilot_chat",
-      "model": "gemini-2.5-pro"
+      "model": "gpt-5"
     }
   },
   "git_panel": {
