@@ -39,7 +39,7 @@ exec-once = vicinae server
 #exec-once = waybar & nm-applet
 exec-once = ags run
 
-exec = $HOME/.config/hypr/hyprpaper_random.sh
+exec = $HOME/.config/hypr/hyprpaper_random.sh &
 
 #############################
 ### ENVIRONMENT VARIABLES ###

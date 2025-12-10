@@ -112,7 +112,7 @@ function SystemTray() {
             null,
             (source: Gio.DBusConnection | null, res: Gio.AsyncResult) => {
                 try {
-                    if (!source) return
+                    if (!source) throw new Error("no DBus source")
                     const result = source.call_finish(res)
                     const variant = result.get_child_value(0).get_variant()
                     if (variant) {
@@ -120,10 +120,63 @@ function SystemTray() {
                         items.forEach(fetchTrayItem)
                     }
                 } catch (e) {
-                    // No items or watcher not running
+                    // Watcher not available – fall back to scanning the bus directly
+                    startDirectScanFallback()
                 }
             }
         )
+    }
+
+    // Fallback for environments without a StatusNotifierWatcher (e.g. plain Hyprland)
+    let directScanStarted = false
+
+    const startDirectScanFallback = () => {
+        if (directScanStarted) return
+        directScanStarted = true
+
+        const scanOnce = () => {
+            bus.call(
+                "org.freedesktop.DBus",
+                "/org/freedesktop/DBus",
+                "org.freedesktop.DBus",
+                "ListNames",
+                null,
+                GLib.VariantType.new("(as)"),
+                Gio.DBusCallFlags.NONE,
+                -1,
+                null,
+                (source: Gio.DBusConnection | null, res: Gio.AsyncResult) => {
+                    try {
+                        if (!source) return
+
+                        const result = source.call_finish(res)
+                        const variant = result.get_child_value(0)
+                        const names = variant.deep_unpack() as string[]
+
+                        const sniNames = names.filter(name =>
+                            name.startsWith("org.freedesktop.StatusNotifierItem-")
+                        )
+                        const sniSet = new Set(sniNames)
+
+                        sniNames.forEach(fetchTrayItem)
+
+                        // Remove items that disappeared
+                        setTrayItems(items =>
+                            items.filter(item => sniSet.has(item.id))
+                        )
+                    } catch {
+                        // ignore errors in fallback
+                    }
+                }
+            )
+        }
+
+        // Run immediately once, then poll periodically
+        scanOnce()
+        GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 5, () => {
+            scanOnce()
+            return GLib.SOURCE_CONTINUE
+        })
     }
     
     const setupWatcher = () => {
@@ -256,13 +309,33 @@ function Workspaces() {
 
 // CPU usage
 function CpuUsage() {
+    let prevIdle = 0
+    let prevTotal = 0
+    let initialized = false
+    
     const cpuUsage = createPoll("0%", 2000, async () => {
         try {
             const result = await execAsync([
                 "sh", "-c",
-                "grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$3+$4+$5)} END {print usage}'"
+                "grep '^cpu ' /proc/stat | awk '{idle=$5+$6; total=$2+$3+$4+$5+$6+$7+$8; print idle\" \"total}'"
             ])
-            return `${parseFloat(result.trim() || "0").toFixed(0)}%`
+            const [idle, total] = result.trim().split(" ").map(Number)
+            
+            if (!initialized) {
+                prevIdle = idle
+                prevTotal = total
+                initialized = true
+                return "0%"
+            }
+            
+            const idleDiff = idle - prevIdle
+            const totalDiff = total - prevTotal
+            const usage = totalDiff > 0 ? 100 * (1 - idleDiff / totalDiff) : 0
+            
+            prevIdle = idle
+            prevTotal = total
+            
+            return `${Math.round(usage)}%`
         } catch {
             return "0%"
         }
