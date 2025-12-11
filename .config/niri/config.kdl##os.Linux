@@ -35,7 +35,7 @@ input {
 //}
 
 layout {
-    gaps 4
+    gaps 10
     center-focused-column "never"
     preset-column-widths {
         proportion 0.33333
@@ -43,7 +43,6 @@ layout {
         proportion 0.66667
         proportion 1.0
     }
-
     focus-ring {
         off
     }
@@ -72,7 +71,7 @@ layer-rule {
 }
 
 spawn-at-startup "systemctl" "--user" "enable" "--now" "hypridle"
-spawn-at-startup "hyprpaper"
+spawn-at-startup "swww-daemon"
 spawn-at-startup "trayscale"
 spawn-at-startup "nextcloud"
 spawn-at-startup "wl-paste --watch cliphist store"

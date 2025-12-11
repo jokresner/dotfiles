@@ -31,7 +31,7 @@ $powermenu = ags request logout
 # Autostart necessary processes (like notifications daemons, status bars, etc.)
 # Or execute your favorite apps at launch like this:
 
-exec-once = hypridle & hyprpaper
+exec-once = hypridle & swww-daemon
 exec-once = trayscale & nextcloud
 exec-once = wl-paste --watch cliphist store
 exec-once = systemctl --user start hyprpolkitagent
@@ -39,7 +39,7 @@ exec-once = vicinae server
 #exec-once = waybar & nm-applet
 exec-once = ags run
 
-exec = $HOME/.config/hypr/hyprpaper_random.sh &
+exec = $HOME/.config/niri/random_wallpaper.sh &
 
 #############################
 ### ENVIRONMENT VARIABLES ###
