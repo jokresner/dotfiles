@@ -38,6 +38,7 @@ exec-once = systemctl --user start hyprpolkitagent
 exec-once = vicinae server
 #exec-once = waybar & nm-applet
 exec-once = ags run
+exec-once = easyeffects --service-mode
 
 exec = $HOME/.config/niri/random_wallpaper.sh &
 
