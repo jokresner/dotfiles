@@ -158,9 +158,7 @@ misc {
 # https://wiki.hyprland.org/Configuring/Variables/#input
 input {
     kb_layout = de
-		kb_variant = nodeadkeys
     kb_model =
-    kb_options = lv3:lalt_switch
     kb_rules =
 
     follow_mouse = 1
