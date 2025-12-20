@@ -1,0 +1,4 @@
+font-family = "Myna Nerd Font"
+theme = "Catppuccin Mocha"
+window-theme = ghostty
+command = bash -c "$SHELL"
