@@ -1,0 +1,12 @@
+---
+alwaysApply: false
+---
+
+# PHP Code Style
+- Follow PSR-12 strictly; run php-cs-fixer or PHP_CodeSniffer on commit.
+- Enable strict_types=1 in all files.
+- Use typed properties/params/returns; avoid mixed unless documented.
+- One class per file; namespaces match directory structure.
+- Limit line length to 120; prefer early returns to reduce nesting.
+- Prefer short array syntax []; no Yoda conditions.
+- Use null coalesce (??) and nullsafe (?->) where appropriate.

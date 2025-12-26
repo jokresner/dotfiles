@@ -1,0 +1,10 @@
+---
+alwaysApply: false
+---
+
+# Security
+- Never commit secrets; load via env (vlucas/phpdotenv or server env).
+- Escape output (HTML/JS) and use parameterized queries everywhere.
+- Validate and sanitize all input; centralize validation.
+- Use password_hash()/password_verify(); never custom crypto.
+- Enable SameSite, HttpOnly, Secure cookies; rotate session IDs on login.

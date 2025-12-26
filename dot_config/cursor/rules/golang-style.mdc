@@ -1,0 +1,26 @@
+---
+alwaysApply: false
+---
+
+# Go Code Style Rules
+- Always run `gofmt` or `goimports` before committing.
+- Follow Go naming conventions:
+  - Exported identifiers: PascalCase.
+  - Unexported identifiers: camelCase.
+- Keep line length <= 100 characters.
+- Group standard library imports first, then third-party, then local modules.
+- Avoid unnecessary abbreviations in variable names.
+- Use `error` as the last return value in functions.
+- Prefer `context.Context` as the first argument in long-lived or external-facing funcs.
+
+# Go Code Style Rules
+- Always run `gofmt` or `goimports` before committing.
+- Follow Go naming conventions:
+  - Exported identifiers: PascalCase.
+  - Unexported identifiers: camelCase.
+- Keep line length <= 100 characters.
+- Group standard library imports first, then third-party, then local modules.
+- Avoid unnecessary abbreviations in variable names.
+- Use `error` as the last return value in functions.
+- Prefer `context.Context` as the first argument in long-lived or external-facing funcs.
+

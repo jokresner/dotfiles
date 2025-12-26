@@ -1,0 +1,118 @@
+// === THEME AND UI ===
+theme "catppuccin-mocha"
+
+// === UI CUSTOMIZATION ===
+ui {
+    pane_frames {
+        rounded_corners true
+        hide true
+    }
+}
+
+// === KEYBINDINGS ===
+keybinds {
+    shared_except "locked" {
+        // room (tab switcher)
+        bind "Ctrl Shift r" {
+            LaunchOrFocusPlugin "room" {
+                floating true
+                move_to_focused_tab true
+                ignore_case true
+                quick_jump true
+            }
+        }
+        // zellij-forgot (keybind cheat sheet / notes)
+        bind "Ctrl Shift f" {
+            LaunchOrFocusPlugin "zellij-forgot" {
+                floating true
+                move_to_focused_tab true
+                "LOAD_ZELLIJ_BINDINGS" "true"
+            }
+        }
+        // zessionizer (Project Session Manager)
+        bind "Ctrl Shift s" {
+            LaunchOrFocusPlugin "zessionizer" {
+                floating true
+                move_to_focused_tab true
+            }
+            SwitchToMode "normal"
+        }
+        // Scratchpad floating pane
+        bind "Alt t" { ToggleFloatingPanes; }
+
+        // Vim Navigation
+        bind "Ctrl h" "Ctrl Left" { MoveFocusOrTab "Left"; }
+        bind "Ctrl l" "Ctrl Right" { MoveFocusOrTab "Right"; }
+        bind "Ctrl j" "Ctrl Down" { MoveFocus "Down"; }
+        bind "Ctrl k" "Ctrl Up" { MoveFocus "Up"; }
+
+        // Floating Apps
+        bind "Alt g" { Run "lazygit" { floating true; close_on_exit true; }; }
+        bind "Alt m" { Run "btop" { floating true; close_on_exit true; }; }
+        bind "Alt y" { Run "yazi" { floating true; close_on_exit true; }; }
+
+        // Tab Management
+        bind "Alt H" { MoveTab "Left"; }
+        bind "Alt L" { MoveTab "Right"; }
+
+        // Additional enhancements
+        bind "Alt f" { ToggleFocusFullscreen; }
+        bind "Alt w" { ToggleTab; }
+
+        // Fast Tab Renaming
+        bind "Alt r" {
+            SwitchToMode "RenameTab";
+            TabNameInput 0;
+        }
+    }
+}
+
+// === COPY/PASTE BEHAVIOR ===
+copy_on_select true
+copy_command "wl-copy"
+
+// === SESSION BEHAVIOR ===
+show_startup_tips false
+session_serialization true
+pane_viewport_serialization true
+
+// === PLUGINS ===
+load_plugins {
+    "~/.config/zellij/plugins/room.wasm"
+    "~/.config/zellij/plugins/zellij_forgot.wasm"
+    "~/.config/zellij/plugins/zjstatus.wasm"
+}
+
+plugins {
+    tab-bar location="zellij:tab-bar"
+    status-bar location="zellij:status-bar"
+    strider location="zellij:strider"
+    compact-bar location="zellij:compact-bar"
+    session-manager location="zellij:session-manager"
+    welcome-screen location="zellij:session-manager" {
+        welcome_screen true
+    }
+    filepicker location="zellij:strider" {
+        cwd "/"
+    }
+    configuration location="zellij:configuration"
+    plugin-manager location="zellij:plugin-manager"
+    about location="zellij:about"
+
+    zjstatus location="file:~/.config/zellij/plugins/zjstatus.wasm"
+    zellij-forgot location="file:~/.config/zellij/plugins/zellij_forgot.wasm" {
+        "LOAD_ZELLIJ_BINDINGS" "true"
+    }
+    room location="file:~/.config/zellij/plugins/room.wasm"
+    zessionizer location="file:~/.config/zellij/plugins/zessionizer.wasm" {
+        scan_paths "~/Repos"
+        cwd "/home/johannes"
+        theme "catppuccin-mocha"
+    }
+}
+
+// === LAYOUT SETTINGS ===
+default_layout "catppuccin_tabs"
+
+// === EDITOR INTEGRATION ===
+scrollback_editor "nvim +$"

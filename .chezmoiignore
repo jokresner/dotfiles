@@ -1,0 +1,21 @@
+# General ignores
+fonts/**
+.git/**
+.DS_Store
+
+# Linux-specific (Ignore on macOS)
+{{ if ne .chezmoi.os "linux" }}
+.config/dunst
+.config/hypr
+.config/niri
+.config/waybar
+.config/wlogout
+.config/wofi
+.local/share/fonts
+{{ end }}
+
+# macOS-specific (Ignore on Linux)
+{{ if ne .chezmoi.os "darwin" }}
+.config/aerospace
+{{ end }}
+

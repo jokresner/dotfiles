@@ -1,0 +1,10 @@
+---
+alwaysApply: false
+---
+
+# Errors & Exceptions
+- Never suppress errors with @.
+- Throw domain-specific exceptions; do not return error strings.
+- Catch only what you can handle; rethrow with previous exception.
+- Use Value Objects for validation; avoid silent defaults.
+- Log unexpected exceptions once at the edge (middleware/handler).

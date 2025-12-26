@@ -1,0 +1,17 @@
+---
+description: Auto-document session to Anytype (asks Work/Private) and saves to today's daily page
+alwaysApply: false
+---
+
+# Auto Document Session (Work/Private)
+
+- Ask me which Anytype space: **Work Journal** or **Private Journal**.
+- Use **@Git** to gather staged diffs/commit messages and **@Past Chats** for today’s key exchanges.
+- Summarize as Markdown sections:
+  1) Date & Context
+  2) Git Changes
+  3) Cursor Interaction Summary
+  4) Completed Work
+  5) Pending Work / Next Steps
+- Using the Anytype MCP, **create or append** to the daily page titled `YYYY-MM-DD` in the chosen space. If missing, create it; then append the entry (separate entries with `---`).
+

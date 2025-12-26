@@ -121,6 +121,8 @@ alias vim = nvim
 alias v = nvim
 alias t = task
 alias ag = ast-grep
+alias zdev = zellij --layout yazineo
+alias zterm = zellij --layout terminal
 
 if ( which task | is-empty ) {
 	alias task = go tool task
@@ -210,3 +212,20 @@ def --env y [...args] {
 	}
 	rm -fp $tmp
 }
+
+# zj: "Smart Zellij"
+# 1. If argument provided: cd there, then open zellij
+# 2. If no argument: open zellij in current dir
+def --env zj [path?: string] {
+    if ($path != null) {
+        cd $path
+    }
+    let session_name = ($env.PWD | path basename)
+    
+    let result = (do -i { zellij attach $session_name } | complete)
+    
+    if $result.exit_code != 0 {
+        zellij attach -c $session_name
+    }
+}
+

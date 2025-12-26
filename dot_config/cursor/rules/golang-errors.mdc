@@ -1,0 +1,10 @@
+---
+alwaysApply: false
+---
+
+# Error Handling Rules
+- Always return errors instead of panicking (except in `main` or tests).
+- Wrap errors with `%w` when using `fmt.Errorf` for context.
+- Do not ignore errors; handle or log them explicitly.
+- Use sentinel errors or `errors.Is` / `errors.As` for checking.
+

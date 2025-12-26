@@ -2,3 +2,6 @@ font-family = "Myna Nerd Font"
 theme = "Catppuccin Mocha"
 window-theme = ghostty
 command = bash -c "$SHELL"
+background-opacity = 0.85
+background-blur = true
+auto-update = check

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Hash of fonts to trigger execution when files change:
+{{ range glob (joinPath .chezmoi.sourceDir "fonts" "*.otf") -}}
+# {{ include . | sha256sum }}
+{{ end -}}
+
+set -e
+
+{{ if eq .chezmoi.os "linux" -}}
+FONT_DIR="$HOME/.local/share/fonts"
+echo "Installing fonts to $FONT_DIR..."
+mkdir -p "$FONT_DIR"
+cp "{{ .chezmoi.sourceDir }}/fonts/"*.otf "$FONT_DIR/"
+echo "Refreshing font cache..."
+fc-cache -f -v "$FONT_DIR"
+{{ else if eq .chezmoi.os "darwin" -}}
+FONT_DIR="$HOME/Library/Fonts"
+echo "Installing fonts to $FONT_DIR..."
+mkdir -p "$FONT_DIR"
+cp "{{ .chezmoi.sourceDir }}/fonts/"*.otf "$FONT_DIR/"
+{{ end -}}

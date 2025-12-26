@@ -1,0 +1,42 @@
+{
+  "mcpServers": {
+    "github.com/modelcontextprotocol/servers/tree/main/src/git": {
+      "args": [
+        "mcp-server-git"
+      ],
+      "command": "uvx"
+    },
+    "github.com/upstash/context7-mcp": {
+      "args": [
+        "@upstash/context7-mcp"
+      ],
+      "command": "pnpx"
+    },
+    "memory": {
+      "args": [
+        "@modelcontextprotocol/server-memory"
+      ],
+      "command": "pnpx"
+    },
+    "searxng": {
+      "args": [
+        "mcp-searxng"
+      ],
+      "autoApprove": [
+        "search"
+      ],
+      "command": "pnpx",
+      "disabled": false,
+      "env": {
+        "SEARXNG_URL": "https://search.jokresner.de"
+      }
+    },
+    "sequentialthinking": {
+      "args": [
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
+      "command": "pnpx"
+    }
+  },
+  "nativeMCPServers": []
+}

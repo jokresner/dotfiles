@@ -6,6 +6,47 @@ show_symlink = true
 wrap = "yes"
 
 [opener]
+zellij = [
+  { run = 'zellij action new-pane -- nvim "$@"', desc = "Open in new Zellij Pane", block = true }
+]
 edit = [
   { run = 'nvim "$@"', desc = "Edit in Neovim", block = true, for = "unix" }
 ]
+
+[open]
+prepend_rules = [
+	{ mime = "text/*", use = [ "zellij", "edit" ] },
+	{ mime = "application/json", use = [ "zellij", "edit" ] },
+	{ mime = "application/xml", use = [ "zellij", "edit" ] },
+    { name = "*.lua", use = [ "zellij", "edit" ] },
+    { name = "*.nu", use = [ "zellij", "edit" ] },
+    { name = "*.rs", use = [ "zellij", "edit" ] },
+    { name = "*.go", use = [ "zellij", "edit" ] },
+    { name = "*.js", use = [ "zellij", "edit" ] },
+    { name = "*.ts", use = [ "zellij", "edit" ] },
+    { name = "*.tsx", use = [ "zellij", "edit" ] },
+    { name = "*.jsx", use = [ "zellij", "edit" ] },
+    { name = "*.kdl", use = [ "zellij", "edit" ] },
+    { name = "*.toml", use = [ "zellij", "edit" ] },
+    { name = "*.md", use = [ "zellij", "edit" ] },
+    { name = "*.yaml", use = [ "zellij", "edit" ] },
+    { name = "*.yml", use = [ "zellij", "edit" ] },
+    { name = "*.json", use = [ "zellij", "edit" ] },
+    { name = "*.py", use = [ "zellij", "edit" ] },
+    { name = "*.sh", use = [ "zellij", "edit" ] },
+    { name = "*.zsh", use = [ "zellij", "edit" ] },
+    { name = "*.bash", use = [ "zellij", "edit" ] },
+    { name = "*.fish", use = [ "zellij", "edit" ] },
+    { name = "Containerfile", use = [ "zellij", "edit" ] },
+    { name = "Dockerfile", use = [ "zellij", "edit" ] },
+]
+
+[[plugin.prepend_fetchers]]
+id = "git"
+name = "*"
+run = "git"
+
+[[plugin.prepend_fetchers]]
+id = "git"
+name = "*/"
+run = "git"

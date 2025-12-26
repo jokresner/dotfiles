@@ -1,0 +1,10 @@
+---
+alwaysApply: false
+---
+
+# Testing
+- Use PHPUnit or Pest; tests live in tests/.
+- Aim ≥ 85% coverage for domain/services; integration tests for I/O.
+- Test names: testMethod_Scenario_ExpectedResult.
+- Use data providers/table tests for variants.
+- Mock only external boundaries (HTTP/DB/FS); avoid over-mocking.
