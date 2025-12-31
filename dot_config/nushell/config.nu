@@ -194,8 +194,6 @@ def capture-foreign-env [
         after: ($in | last | str trim | split row (char --integer 0))
     }
 
-    # Unfortunate Assumption:
-    # No changed env var contains newlines (not cleanly parseable)
     $env_out.after
     | where { |line| $line not-in $env_out.before } # Only get changed lines
     | parse "{key}={value}"
@@ -222,10 +220,6 @@ def --env zj [path?: string] {
     }
     let session_name = ($env.PWD | path basename)
     
-    let result = (do -i { zellij attach $session_name } | complete)
-    
-    if $result.exit_code != 0 {
-        zellij attach -c $session_name
-    }
+    zellij attach -c $session_name
 }
 
