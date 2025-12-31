@@ -1,0 +1,74 @@
+{
+  "context_servers": {
+    "ProxyMCP": {
+      "settings": {},
+
+      "enabled": true,
+      "url": "http://localhost:8888/mcp",
+    },
+    "mcp-server-context7": {
+      "enabled": true,
+      "settings": {},
+    },
+  },
+  "agent": {
+    "always_allow_tool_actions": true,
+    "use_modifier_to_send": true,
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-5.1-codex",
+    },
+  },
+  "git_panel": {
+    "dock": "right",
+  },
+  "theme": {
+    "mode": "dark",
+    "light": "Catppuccin Latte",
+    "dark": "Catppuccin Mocha",
+  },
+  "icon_theme": "Catppuccin Mocha",
+  "features": {
+    "edit_prediction_provider": "zed",
+  },
+  "base_keymap": "JetBrains",
+  "vim_mode": true,
+  "vim": {
+    "toggle_relative_line_numbers": true,
+    "use_smartcase_find": true,
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "ui_font_size": 14,
+  "buffer_font_size": 12,
+  "file_finder": {
+    "modal_max_width": "medium",
+  },
+  "scrollbar": {
+    "show": "auto",
+  },
+  "tabs": {
+    "show_diagnostics": "errors",
+  },
+  "indent_guides": {
+    "enabled": true,
+    "coloring": "indent_aware",
+  },
+  "centered_layout": {
+    "left_padding": 0.15,
+    "right_padding": 0.15,
+  },
+  "inlay_hints": {
+    "enabled": true,
+  },
+  "file_scan_exclusions": ["**/.git", "**/.DS_Store", "**/node_modules"],
+  "lsp": {
+    "gopls": {
+      "initialization_options": {
+        "buildFlags": ["-tags=integration,wireinject"],
+      },
+    },
+  },
+}
