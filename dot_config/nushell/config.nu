@@ -112,7 +112,6 @@ $env.PATH = ( $env.PATH | split row (char esep) | where { |p| $p != $shims_dir }
 alias ll = ls -l
 alias la = ls -la
 alias lg = lazygit
-alias yl = lazygit --git-dir ~/.local/share/yadm/repo.git --work-tree ~
 alias cocker = docker compose
 alias ff = fastfetch
 alias lj = lazyjj
@@ -148,9 +147,9 @@ source ~/.cache/starship/init.nu
 source ~/.cache/zoxide/init.nu
 source ~/.cache/atuin/init.nu
 
-#----------
-# Nix Setup
-#----------
+#----------------
+# Nix Setup MacOS
+#----------------
 
 if ($nu.os-info.name == 'macos') {
   load-env (open /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh | capture-foreign-env err> /dev/null)
@@ -166,6 +165,7 @@ source ~/.config/nushell/hooks/direnv.nu
 # Scripts
 # -------
 
+source ~/.config/nushell/scripts/git/mod.nu
 
 #----------
 # Functions
@@ -194,6 +194,8 @@ def capture-foreign-env [
         after: ($in | last | str trim | split row (char --integer 0))
     }
 
+    # Unfortunate Assumption:
+    # No changed env var contains newlines (not cleanly parseable)
     $env_out.after
     | where { |line| $line not-in $env_out.before } # Only get changed lines
     | parse "{key}={value}"
@@ -220,6 +222,7 @@ def --env zj [path?: string] {
     }
     let session_name = ($env.PWD | path basename)
     
+    # Use -c to attach if exists (including EXITED) or create if it doesn't
     zellij attach -c $session_name
 }
 
