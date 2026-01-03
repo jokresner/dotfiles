@@ -71,10 +71,10 @@ layer-rule {
 }
 
 spawn-at-startup "systemctl" "--user" "enable" "--now" "hypridle"
-spawn-at-startup "swww-daemon"
+spawn-at-startup "wallpaperengine-gui" "-m"
+spawn-at-startup "random_wallpaper"
 spawn-at-startup "trayscale" "--hide-window"
 spawn-at-startup "nextcloud" "--background"
-spawn-at-startup "wl-paste --watch cliphist store"
 spawn-at-startup "systemctl" "--user" "start" "hyprpolkitagent"
 spawn-at-startup "vicinae" "server"
 spawn-at-startup ".config/waybar/waybar.sh"
@@ -97,8 +97,12 @@ environment {
      _JAVA_AWT_WM_NONREPARENTING "1"
     ELECTRON_OZONE_PLATFORM_HINT "auto"
     QT_QPA_PLATFORMTHEME "qt5ct"
+    QT_QPA_PLATFORM "wayland"
+    QT_STYLE_OVERRIDE "kvantum"
     XCURSOR_SIZE "24"
     XCURSOR_THEME "Bibata-Modern-Classic"
+    __GL_THREADED_OPTIMIZATIONS "0"
+    PROTON_DLSS_UPGRADE "1"
     //nv __GL_VRR_ALLOWED "1"
     //nv __GL_GSYNC_ALLOWED "1"
 }
@@ -142,7 +146,6 @@ binds {
     Mod+Return { spawn "ghostty"; }
     Super+Space { spawn "vicinae" "toggle"; }
     Super+L { spawn "hyprlock"; }
-    Super+V { spawn "nwg-clipman"; }
     Super+M { spawn "wlogout"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "-l" "1" "@DEFAULT_AUDIO_SINK@" "5%+"; }
