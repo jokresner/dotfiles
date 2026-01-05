@@ -118,6 +118,7 @@ alias lj = lazyjj
 alias vi = nvim
 alias vim = nvim
 alias v = nvim
+alias vd = chezmoi edit # edit dotfiles
 alias t = task
 alias ag = ast-grep
 alias zdev = zellij --layout yazineo

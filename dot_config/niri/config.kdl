@@ -71,7 +71,7 @@ layer-rule {
 }
 
 spawn-at-startup "systemctl" "--user" "enable" "--now" "hypridle"
-spawn-at-startup "wallpaperengine-gui" "-m"
+spawn-at-startup "swww-daemon"
 spawn-at-startup "random_wallpaper"
 spawn-at-startup "trayscale" "--hide-window"
 spawn-at-startup "nextcloud" "--background"
@@ -260,9 +260,8 @@ binds {
     Mod+R { switch-preset-column-width; }
     Mod+Shift+R { switch-preset-window-height; }
     Mod+Ctrl+R { reset-window-height; }
-    // Mod+F { maximize-column; }
+    Mod+Shift+F { maximize-column; }
     Mod+F { fullscreen-window; }
-    Mod+Shift+F { spawn "nemo"; }
     Mod+C { center-column; }
     Mod+Minus { set-column-width "-10%"; }
     Mod+Equal { set-column-width "+10%"; }
