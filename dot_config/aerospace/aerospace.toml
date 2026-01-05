@@ -201,13 +201,3 @@ automatically-unhide-macos-hidden-apps = false
 	9 = 3
 	10 = 3
 
-[gaps]
-inner = 10
-outer = 10
-
-[mode.main.binding]
-alt-slash = 'layout tiles horizontal vertical'
-alt-comma = 'layout accordion horizontal vertical'
-
-[exec]
-inherit-env = ['XDG_CONFIG_HOME', 'XDG_CACHE_HOME', 'XDG_DATA_HOME', 'XDG_STATE_HOME']

@@ -31,3 +31,14 @@ install_pkg() {
 # Install packages
 install_pkg git curl wget bob ripgrep fd nushell starship zoxide
 install_pkg lazygit fastfetch atuin zellij unp carapace
+
+# Install asdf plugins + versions
+asdf plugin add nodejs
+asdf plugin add python
+asdf plugin add pnpm
+asdf plugin add zig
+asdf plugin add yarn
+asdf plugin add bun
+asdf plugin add uv
+
+asdf install
