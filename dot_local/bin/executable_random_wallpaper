@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DIR="$HOME/Nextcloud/wallpaper_arch"
+DIR="$HOME/Nextcloud/Wallpaper"
 INTERVAL=300   # seconds between changes
 
 swww init 2>/dev/null
