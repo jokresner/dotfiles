@@ -76,12 +76,7 @@ show_startup_tips false
 session_serialization true
 pane_viewport_serialization true
 
-// === PLUGINS ===
-load_plugins {
-    "~/.config/zellij/plugins/room.wasm"
-    "~/.config/zellij/plugins/zellij_forgot.wasm"
-    "~/.config/zellij/plugins/zjstatus.wasm"
-}
+
 
 plugins {
     tab-bar location="zellij:tab-bar"
@@ -89,9 +84,7 @@ plugins {
     strider location="zellij:strider"
     compact-bar location="zellij:compact-bar"
     session-manager location="zellij:session-manager"
-    welcome-screen location="zellij:session-manager" {
-        welcome_screen true
-    }
+    
     filepicker location="zellij:strider" {
         cwd "/"
     }
@@ -105,14 +98,17 @@ plugins {
     }
     room location="file:~/.config/zellij/plugins/room.wasm"
     zessionizer location="file:~/.config/zellij/plugins/zessionizer.wasm" {
-        scan_paths "~/Repos"
+        // scan_paths "~/Repos" // You can keep this if you like the fuzzy finding
+        default_dirs "~/Repos" // Or use this for explicit directories
+        // default_layout "my-project-layout" // Optional: specify a layout for projects
+        // find_cmd "fd" // Optional: use fd for faster searching
         cwd "/home/johannes"
         theme "catppuccin-mocha"
     }
 }
 
 // === LAYOUT SETTINGS ===
-default_layout "catppuccin_tabs"
+default_layout "default"
 
 // === EDITOR INTEGRATION ===
 scrollback_editor "nvim +$"
