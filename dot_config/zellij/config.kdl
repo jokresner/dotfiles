@@ -5,7 +5,10 @@ theme "catppuccin-mocha"
 ui {
     pane_frames {
         rounded_corners true
-        hide true
+        hide false // Un-hide the frames
+        corner_char "╰"
+        border_char "─"
+        border_color "#89b4fa" // A nice blue from the Catppuccin palette
     }
 }
 
@@ -50,6 +53,12 @@ keybinds {
         bind "Alt g" { Run "lazygit" { floating true; close_on_exit true; }; }
         bind "Alt m" { Run "btop" { floating true; close_on_exit true; }; }
         bind "Alt y" { Run "yazi" { floating true; close_on_exit true; }; }
+        bind "Alt d" {
+            LaunchOrFocusPlugin "zj-docker" {
+                floating true
+                move_to_focused_tab true
+            }
+        }
 
         // Tab Management
         bind "Alt H" { MoveTab "Left"; }
@@ -58,12 +67,41 @@ keybinds {
         // Additional enhancements
         bind "Alt f" { ToggleFocusFullscreen; }
         bind "Alt w" { ToggleTab; }
+        bind "Alt n" { SwitchToMode "resize"; }
 
         // Fast Tab Renaming
         bind "Alt r" {
             SwitchToMode "RenameTab";
             TabNameInput 0;
         }
+
+        bind "Ctrl r" {
+            Run "zellij" "run" {
+                floating true
+            }
+        }
+
+        // Pane Management
+        bind "Ctrl p" { SwitchToMode "pane"; }
+
+    }
+
+    pane {
+        bind "n" { NewPane; }
+        bind "x" { CloseFocus; }
+        bind "h" { MoveFocus "Left"; }
+        bind "l" { MoveFocus "Right"; }
+        bind "j" { MoveFocus "Down"; }
+        bind "k" { MoveFocus "Up"; }
+
+        bind "Esc" { SwitchToMode "Normal"; }
+    }
+    resize "normal" {
+        bind "h" { Resize "Increase Left"; }
+        bind "j" { Resize "Increase Down"; }
+        bind "k" { Resize "Increase Up"; }
+        bind "l" { Resize "Increase Right"; }
+        bind "Esc" { SwitchToMode "Normal"; }
     }
 }
 
@@ -79,8 +117,7 @@ pane_viewport_serialization true
 
 
 plugins {
-    tab-bar location="zellij:tab-bar"
-    status-bar location="zellij:status-bar"
+
     strider location="zellij:strider"
     compact-bar location="zellij:compact-bar"
     session-manager location="zellij:session-manager"
@@ -99,11 +136,31 @@ plugins {
     room location="file:~/.config/zellij/plugins/room.wasm"
     zessionizer location="file:~/.config/zellij/plugins/zessionizer.wasm" {
         // scan_paths "~/Repos" // You can keep this if you like the fuzzy finding
-        default_dirs "~/Repos" // Or use this for explicit directories
+        default_dirs "~/Repos" "~/.config" // Added ~/.config
         // default_layout "my-project-layout" // Optional: specify a layout for projects
-        // find_cmd "fd" // Optional: use fd for faster searching
+        find_cmd "fd" // Enabled fd for faster searching
         cwd "/home/johannes"
         theme "catppuccin-mocha"
+
+        session_rules {
+            rule {
+                contains_files "*.go"
+                layout "go-dev"
+            }
+            rule {
+                contains_files "Cargo.toml" "*.rs"
+                layout "rust-dev"
+            }
+            rule {
+                contains_files "*.typ"
+                layout "typst-dev"
+            }
+            rule {
+                contains_files "composer.json" "*.php"
+                layout "php-dev"
+            }
+            default_layout "default" // Fallback to the default layout
+        }
     }
 }
 
