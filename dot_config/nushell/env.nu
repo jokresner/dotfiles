@@ -31,5 +31,8 @@ def create_cache [name: string, generator: closure] {
 create_cache starship { starship init nu }
 create_cache zoxide { zoxide init nushell }
 create_cache atuin { atuin init nu }
-create_cache carapace { $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense'; carapace _carapace nushell }
+create_cache carapace { 
+    $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense'; 
+    ^carapace _carapace nushell | str replace '$env.config = $current' '$env.config = ($env.config? | default {} | merge $current)'
+}
 create_cache mise { ^mise activate nu }
