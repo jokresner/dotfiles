@@ -1,0 +1,4 @@
+module Bar
+Bar 1.0 Bar.qml
+BarSection 1.0 BarSection.qml
+BarPill 1.0 BarPill.qml

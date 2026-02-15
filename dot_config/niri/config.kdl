@@ -18,21 +18,14 @@ input {
     focus-follows-mouse max-scroll-amount="0%"
 }
 
-output "DP-5" {
-    mode "1920x1080@75"
+output "Samsung Electric Company C49HG9x H4ZRC02847" {
+    mode "3840x1080@144"
     scale 1
     transform "normal"
     variable-refresh-rate on-demand=true
     position x=0 y=0
 }
 
-output "DP-4" {
-    mode "3440x1440@175"
-    scale 1
-    transform "normal"
-    variable-refresh-rate on-demand=true
-    position x=1920 y=0
-}
 
 layout {
     gaps 10
@@ -77,7 +70,7 @@ spawn-at-startup "trayscale" "--hide-window"
 spawn-at-startup "nextcloud" "--background"
 spawn-at-startup "systemctl" "--user" "start" "hyprpolkitagent"
 spawn-at-startup "vicinae" "server"
-spawn-at-startup ".config/waybar/waybar.sh"
+spawn-at-startup "quickshell"
 spawn-at-startup "mcpproxy" "serve"
 spawn-at-startup "lxqt-policykit-agent"
 
@@ -98,9 +91,10 @@ environment {
     TERMINAL "ghostty"
      _JAVA_AWT_WM_NONREPARENTING "1"
     ELECTRON_OZONE_PLATFORM_HINT "wayland"
-    QT_QPA_PLATFORMTHEME "qt5ct"
-    QT_QPA_PLATFORM "wayland"
+    QT_QPA_PLATFORMTHEME "qt5ct:qt6ct"
+    QT_QPA_PLATFORM "xcb"
     QT_STYLE_OVERRIDE "kvantum"
+    GTK_THEME "catppuccin-mocha-mauve-standard+default"
     XCURSOR_SIZE "24"
     XCURSOR_THEME "Bibata-Modern-Classic"
     __GL_THREADED_OPTIMIZATIONS "0"
@@ -141,6 +135,14 @@ window-rule {
 window-rule {
     geometry-corner-radius 20
     clip-to-geometry true
+}
+    
+// Make the calendar popup floating and centered (or positioned)
+window-rule {
+    match title="quickshell"
+    open-floating true
+    default-column-width { fixed 250; }
+    default-window-height { fixed 280; }
 }
 
 binds {

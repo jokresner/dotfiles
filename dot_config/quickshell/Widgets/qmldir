@@ -1,0 +1,9 @@
+module Widgets
+Clock 1.0 Clock.qml
+CpuWidget 1.0 CpuWidget.qml
+MemoryWidget 1.0 MemoryWidget.qml
+NetTrafficWidget 1.0 NetTrafficWidget.qml
+StorageWidget 1.0 StorageWidget.qml
+TemperatureWidget 1.0 TemperatureWidget.qml
+AudioWidget 1.0 AudioWidget.qml
+TrayWidget 1.0 TrayWidget.qml
