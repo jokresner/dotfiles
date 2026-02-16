@@ -26,6 +26,25 @@ output "Samsung Electric Company C49HG9x H4ZRC02847" {
     position x=0 y=0
 }
 
+output "Samsung Electric Company SAMSUNG 0x01000E00" {
+    off
+}
+
+output "Samsung Electric Company Odyssey G85SB H1AK500000" {
+    mode "3440x1440@174.962"
+    scale 1
+    transform "normal"
+    variable-refresh-rate
+    position x=1920 y=0
+}
+
+output "Iiyama North America PL2730H 1153680901995" {
+    mode "1920x1080@74.973"
+    scale 1
+    transform "normal"
+    position x=0 y=0
+}
+
 
 layout {
     gaps 10
