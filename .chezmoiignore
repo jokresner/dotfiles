@@ -8,6 +8,7 @@ fonts/**
 .config/dunst
 .config/hypr
 .config/niri
+.config/quickshell
 .config/waybar
 .config/wlogout
 .config/wofi
