@@ -32,7 +32,7 @@ output "Samsung Electric Company SAMSUNG 0x01000E00" {
 
 output "Samsung Electric Company Odyssey G85SB H1AK500000" {
     mode "3440x1440@174.962"
-    scale 1
+    scale 1.33
     transform "normal"
     variable-refresh-rate
     position x=1920 y=0
@@ -111,7 +111,7 @@ environment {
      _JAVA_AWT_WM_NONREPARENTING "1"
     ELECTRON_OZONE_PLATFORM_HINT "wayland"
     QT_QPA_PLATFORMTHEME "qt5ct:qt6ct"
-    QT_QPA_PLATFORM "xcb"
+    QT_QPA_PLATFORM "wayland"
     QT_STYLE_OVERRIDE "kvantum"
     GTK_THEME "catppuccin-mocha-mauve-standard+default"
     XCURSOR_SIZE "24"
