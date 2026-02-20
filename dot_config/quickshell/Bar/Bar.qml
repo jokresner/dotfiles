@@ -24,6 +24,7 @@ PanelWindow {
 
         BarPill {
             Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            WorkspaceWidget {}
             NetTrafficWidget {}
         }
 

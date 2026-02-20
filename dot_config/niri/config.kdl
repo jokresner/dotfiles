@@ -87,7 +87,7 @@ spawn-at-startup "swww-daemon"
 spawn-at-startup "random_wallpaper"
 spawn-at-startup "trayscale" "--hide-window"
 spawn-at-startup "nextcloud" "--background"
-spawn-at-startup "vicinae" "server"
+spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
 spawn-at-startup "quickshell"
 spawn-at-startup "mcpproxy" "serve"
 spawn-at-startup "lxqt-policykit-agent"
@@ -166,9 +166,10 @@ window-rule {
 binds {
     Mod+Shift+7{ show-hotkey-overlay; }
     Mod+Return { spawn "ghostty"; }
-    Super+Space { spawn "vicinae" "toggle"; }
+    Super+Space { spawn "~/.config/wofi/launch.sh"; }
     Super+L { spawn "hyprlock"; }
     Super+M { spawn "wlogout"; }
+    Super+V { spawn "sh" "-c" "cliphist list | wofi -S dmenu | cliphist decode | wl-copy"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "-l" "1" "@DEFAULT_AUDIO_SINK@" "5%+"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "-l" "1" "@DEFAULT_AUDIO_SINK@" "5%-"; }

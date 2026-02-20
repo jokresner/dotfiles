@@ -1,5 +1,28 @@
-term=ghostty
+mode=drun
+allow_images=true
+image_size=28
+
+width=520
+height=420
+
 location=center
-prompt= Search
-normal_window=true
-hide_scrolle=true
+anchor=top-left
+layer=overlay
+
+xoffset= (screen_width - wofi_width) / 2
+yoffset= (screen_height - wofi_height) / 2
+
+halign=fill
+orientation=vertical
+
+prompt=
+search=
+insensitive=true
+matching=fuzzy
+
+show=drun
+term=ghostty
+
+no_actions=true
+hide_scroll=true
+gtk_dark=true

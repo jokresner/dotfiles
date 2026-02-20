@@ -7,3 +7,4 @@ StorageWidget 1.0 StorageWidget.qml
 TemperatureWidget 1.0 TemperatureWidget.qml
 AudioWidget 1.0 AudioWidget.qml
 TrayWidget 1.0 TrayWidget.qml
+WorkspaceWidget 1.0 WorkspaceWidget.qml
