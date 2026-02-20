@@ -55,3 +55,7 @@ def --env zj [path?: string] {
     zellij attach -c $session_name
 }
 
+def man [topic: string] {
+    ^man $topic | bat -l man -p
+}
+
