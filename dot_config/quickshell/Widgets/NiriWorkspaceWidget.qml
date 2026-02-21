@@ -54,16 +54,18 @@ Row {
     Repeater {
         model: workspaces
         delegate: Rectangle {
-            width: 20
-            height: 20
-            color: model.isActive ? Theme.accentColor : (model.isOccupied ? "#555" : "#333")
-            border.color: model.isUrgent ? "red" : "#777"
-            border.width: 1
+            height: Theme.barHeight - 16
+            width: height
+            radius: width / 2
+            color: model.isActive ? Theme.mauve : (model.isOccupied ? Theme.surface1 : Theme.surface0)
+            border.color: model.isUrgent ? Theme.red : "transparent"
+            border.width: 2
 
             Text {
                 anchors.centerIn: parent
                 text: model.tagId
-                color: "white"
+                color: Theme.text
+                font.pixelSize: Theme.fontPixelSize
             }
 
             MouseArea {
