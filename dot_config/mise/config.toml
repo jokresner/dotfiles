@@ -1,3 +1,9 @@
 [tools]
+"cargo:aichat" = "latest"
+"cargo:cargo-binstall" = "latest"
 node = "25.6.0"
+rust = "nightly"
 uv = "0.9.28"
+
+[settings.cargo]
+binstall = true
