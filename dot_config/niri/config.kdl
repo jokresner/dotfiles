@@ -27,7 +27,8 @@ output "Samsung Electric Company C49HG9x H4ZRC02847" {
 }
 
 output "Samsung Electric Company SAMSUNG 0x01000E00" {
-    off
+    //off
+    scale 2
 }
 
 output "Samsung Electric Company Odyssey G85SB H1AK500000" {
@@ -65,8 +66,10 @@ layout {
 
     border {
         width 2
-        active-gradient from="#0DB7D4" to="#9778D0" angle=90
-        inactive-color "#04404A"
+        //active-gradient from="#0DB7D4" to="#9778D0" angle=90
+        //inactive-color "#04404A"
+        active-color "#f38ba8"
+        inactive-color "#45475a"
     }
 
     struts {
@@ -99,7 +102,7 @@ environment {
     XDG_CURRENT_DESKTOP "niri"
     XDG_SESSION_DESKTOP "niri"
     MOZ_DBUS_REMOTE "1"
-    GDK_BACKEND "wayland"
+    GDK_BACKEND "wayland,x11"
     QT_AUTO_SCREEN_SCALE_FACTOR "1"
     QT_WAYLAND_FORCE_DPI "physical"
     OZONE_PLATFORM "wayland"
@@ -166,7 +169,7 @@ window-rule {
 binds {
     Mod+Shift+7{ show-hotkey-overlay; }
     Mod+Return { spawn "ghostty"; }
-    Super+Space { spawn "~/.config/wofi/launch.sh"; }
+    Super+Space { spawn "wofi"; }
     Super+L { spawn "hyprlock"; }
     Super+M { spawn "wlogout"; }
     Super+V { spawn "sh" "-c" "cliphist list | wofi -S dmenu | cliphist decode | wl-copy"; }

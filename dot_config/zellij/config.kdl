@@ -29,11 +29,22 @@ keybinds {
                 "LOAD_ZELLIJ_BINDINGS" "true"
             }
         }
-        // zessionizer (Project Session Manager)
+        // session-manager (active sessions / create sessions)
         bind "Ctrl Shift s" {
-            LaunchOrFocusPlugin "zessionizer" {
+            LaunchOrFocusPlugin "session-manager" {
                 floating true
                 move_to_focused_tab true
+            }
+            SwitchToMode "normal"
+        }
+        // zsm (zoxide project sessions)
+        bind "Ctrl Shift p" {
+            LaunchOrFocusPlugin "file:/home/johannes/.config/zellij/plugins/zsm.wasm" {
+                floating true
+                move_to_focused_tab true
+                default_layout "default"
+                show_resurrectable_sessions true
+                base_paths "/home/johannes/Repos|/home/johannes"
             }
             SwitchToMode "normal"
         }
@@ -69,7 +80,7 @@ keybinds {
 
 // === COPY/PASTE BEHAVIOR ===
 copy_on_select true
-copy_command "wl-copy"
+// copy_command "wl-copy"
 
 // === SESSION BEHAVIOR ===
 show_startup_tips false
@@ -98,10 +109,8 @@ plugins {
     }
     room location="file:~/.config/zellij/plugins/room.wasm"
     zessionizer location="file:~/.config/zellij/plugins/zessionizer.wasm" {
-        // scan_paths "~/Repos" // You can keep this if you like the fuzzy finding
-        default_dirs "~/Repos" // Or use this for explicit directories
-        // default_layout "my-project-layout" // Optional: specify a layout for projects
-        // find_cmd "fd" // Optional: use fd for faster searching
+        scan_paths "/home/johannes/Repos"
+        scan_depth "4"
         cwd "/home/johannes"
         theme "catppuccin-mocha"
     }

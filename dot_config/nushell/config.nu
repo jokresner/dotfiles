@@ -111,6 +111,12 @@ overlay use ~/.config/nushell/scripts/alias-finder.nu
 
 source ~/.config/nushell/scripts/commands.nu
 
+#-----------------
+# Completion files
+#-----------------
+
+source ~/.config/nushell/completions/pm.nu
+
 #----------------
 # Custom Banner
 #----------------

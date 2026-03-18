@@ -6,11 +6,8 @@ width=520
 height=420
 
 location=center
-anchor=top-left
+anchor=center
 layer=overlay
-
-xoffset= (screen_width - wofi_width) / 2
-yoffset= (screen_height - wofi_height) / 2
 
 halign=fill
 orientation=vertical

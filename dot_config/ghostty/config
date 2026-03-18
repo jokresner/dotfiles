@@ -1,7 +1,8 @@
-font-family = "Myna Nerd Font"
+font-family = "FiraCode Nerd Font"
 theme = "Catppuccin Mocha"
 window-theme = ghostty
 command = bash -c "$SHELL"
 background-opacity = 0.85
 background-blur = true
 auto-update = check
+shell-integration-features = ssh-terminfo
