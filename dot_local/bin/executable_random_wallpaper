@@ -3,12 +3,12 @@
 DIR="$HOME/Nextcloud/Wallpaper"
 INTERVAL=300   # seconds between changes
 
-swww init 2>/dev/null
+awww init 2>/dev/null
 
 while true; do
     for monitor in "DP-1" "DP-2" "DP-4" "DP-5"; do
     img="$(find "$DIR" -type f \( -iname '*.jpg' -o -iname '*.png' -o -iname '*.jpeg' \) | shuf -n 1)"
-         [ -n "$img" ] && swww img "$img" --transition-type any --transition-duration 1 --outputs "$monitor"
+         [ -n "$img" ] && awww img "$img" --transition-type any --transition-duration 1 --outputs "$monitor"
     done
     sleep "$INTERVAL"
 done

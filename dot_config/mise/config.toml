@@ -1,7 +1,10 @@
 [tools]
+bun = "latest"
 "cargo:aichat" = "latest"
 "cargo:cargo-binstall" = "latest"
 node = "25.6.0"
+pipx = "latest"
+python = "latest"
 rust = "nightly"
 uv = "0.9.28"
 
