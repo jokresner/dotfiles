@@ -37,6 +37,19 @@
     }
   },
   {
+    "context": "VimControl && !menu && vim_mode != operator",
+    "bindings": {
+      "w": "vim::NextSubwordStart",
+      "b": "vim::PreviousSubwordStart",
+      "e": "vim::NextSubwordEnd",
+      "g e": "vim::PreviousSubwordEnd",
+      "left": "vim::WrappingLeft",
+      "right": "vim::WrappingRight",
+      "h": "vim::WrappingLeft",
+      "l": "vim::WrappingRight"
+    }
+  },
+  {
     "context": "vim_mode == insert",
     "bindings": {
       "j k": "vim::NormalBefore",
@@ -90,9 +103,6 @@
           "close_pinned": false
         }
       ],
-      "space y": "editor::Copy",
-      "space Y": "editor::Copy",
-      "space p": "editor::Paste",
       "space n": "editor::GoToDiagnostic",
       "space N": "editor::GoToPreviousDiagnostic",
       "K": "editor::Hover",
@@ -123,8 +133,7 @@
     "bindings": {
       "J": "editor::MoveLineDown",
       "K": "editor::MoveLineUp",
-      "space y": "editor::Copy",
-      "space p": "editor::Paste"
+      "shift-s": "vim::PushAddSurrounds"
     }
   }
 ]

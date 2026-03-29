@@ -8,25 +8,45 @@
         "diagnostics": false,
         "metrics": false
     },
-    "icon_theme": "Catppuccin Mocha",
+    "icon_theme": {
+        "mode": "system",
+        "light": "Catppuccin Latte",
+        "dark": "Catppuccin Mocha"
+    },
     "buffer_font_family": "FiraCode Nerd Font",
     "base_keymap": "JetBrains",
     "ui_font_size": 14,
     "buffer_font_size": 14.0,
-    "theme": "Catppuccin Mocha",
+    "theme": {
+        "mode": "system",
+        "light": "Catppuccin Latte",
+        "dark": "Catppuccin Mocha"
+    },
     "vim_mode": true,
+    "cursor_blink": false,
     "relative_line_numbers": "enabled",
     "current_line_highlight": "line",
     "vertical_scroll_margin": 8,
     "scroll_beyond_last_line": "vertical_scroll_margin",
     "use_smartcase_search": true,
+    "autosave": "on_focus_change",
     "soft_wrap": "editor_width",
     "tab_size": 4,
     "hard_tabs": false,
+    "load_direnv": "direct",
+    "command_aliases": {
+        "W": "w",
+        "Wq": "wq",
+        "WQ": "wq",
+        "Q": "q"
+    },
     "tabs": {
         "file_icons": true,
         "git_status": true,
         "show_diagnostics": "all"
+    },
+    "minimap": {
+        "show": "never"
     },
     "scrollbar": {
         "show": "never"
