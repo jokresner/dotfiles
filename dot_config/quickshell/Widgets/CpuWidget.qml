@@ -19,7 +19,7 @@ Item {
 
     Process {
         id: process
-        command: ["sh", "-c", "awk '/cpu / {u=$2+$4; t=$2+$4+$5; print int(0.5+100*u/t)}' /proc/stat"]
+        command: ["sh", "-c", "read cpu user nice sys idle iowait irq softirq steal guest guest_nice < /proc/stat; idle1=$((idle+iowait)); nonidle1=$((user+nice+sys+irq+softirq+steal)); total1=$((idle1+nonidle1)); sleep 1; read cpu user nice sys idle iowait irq softirq steal guest guest_nice < /proc/stat; idle2=$((idle+iowait)); nonidle2=$((user+nice+sys+irq+softirq+steal)); total2=$((idle2+nonidle2)); totald=$((total2-total1)); idled=$((idle2-idle1)); [ \"$totald\" -gt 0 ] && printf '%s\\n' $(((1000*(totald-idled)/totald + 5)/10)) || printf '0\\n'"]
         running: false
         stdout: StdioCollector {
             onStreamFinished: function() {

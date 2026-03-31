@@ -20,7 +20,7 @@ Item {
 
     Process {
         id: process
-        command: ["sh", "-c", root.hwmonPath ? ("cat " + root.hwmonPath + " 2>/dev/null | awk '{print int($1/1000)}'") : "for d in /sys/class/hwmon/hwmon*; do [ -f \"$d/name\" ] || continue; n=$(cat \"$d/name\" 2>/dev/null); case \"$n\" in coretemp|k10temp|zenpower|k8temp) for f in \"$d\"/temp*_input; do [ -f \"$f\" ] && echo $(($(cat \"$f\")/1000)) && exit 0; done;; esac; done"]
+        command: root.hwmonPath ? ["bash", "/home/johannes/.config/quickshell/scripts/cpu-temp.sh", root.hwmonPath] : ["bash", "/home/johannes/.config/quickshell/scripts/cpu-temp.sh"]
         running: false
         stdout: StdioCollector {
             onStreamFinished: function() {
