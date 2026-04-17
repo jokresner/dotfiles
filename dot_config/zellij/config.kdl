@@ -12,15 +12,6 @@ ui {
 // === KEYBINDINGS ===
 keybinds {
     shared_except "locked" {
-        // room (tab switcher)
-        bind "Ctrl Shift r" {
-            LaunchOrFocusPlugin "room" {
-                floating true
-                move_to_focused_tab true
-                ignore_case true
-                quick_jump true
-            }
-        }
         // zellij-forgot (keybind cheat sheet / notes)
         bind "Ctrl Shift f" {
             LaunchOrFocusPlugin "zellij-forgot" {
@@ -39,7 +30,7 @@ keybinds {
         }
         // zsm (zoxide project sessions)
         bind "Ctrl Shift p" {
-            LaunchOrFocusPlugin "file:/home/johannes/.config/zellij/plugins/zsm.wasm" {
+            LaunchOrFocusPlugin "zsm" {
                 floating true
                 move_to_focused_tab true
                 default_layout "default"
@@ -52,10 +43,34 @@ keybinds {
         bind "Alt t" { ToggleFloatingPanes; }
 
         // Vim Navigation
-        bind "Ctrl h" "Ctrl Left" { MoveFocusOrTab "Left"; }
-        bind "Ctrl l" "Ctrl Right" { MoveFocusOrTab "Right"; }
-        bind "Ctrl j" "Ctrl Down" { MoveFocus "Down"; }
-        bind "Ctrl k" "Ctrl Up" { MoveFocus "Up"; }
+        bind "Ctrl h" {
+            MessagePlugin "navigator" {
+                name "move_focus_or_tab";
+                payload "left";
+                move_mod "ctrl";
+            };
+        }
+        bind "Ctrl j" {
+            MessagePlugin "navigator" {
+                name "move_focus_or_tab";
+                payload "down";
+                move_mod "ctrl";
+            };
+        }
+        bind "Ctrl k" {
+            MessagePlugin "navigator" {
+                name "move_focus_or_tab";
+                payload "up";
+                move_mod "ctrl";
+            };
+        }
+        bind "Ctrl l" {
+            MessagePlugin "navigator" {
+                name "move_focus_or_tab";
+                payload "right";
+                move_mod "ctrl";
+            };
+        }
 
         // Floating Apps
         bind "Alt g" { Run "lazygit" { floating true; close_on_exit true; }; }
@@ -103,17 +118,12 @@ plugins {
     plugin-manager location="zellij:plugin-manager"
     about location="zellij:about"
 
-    zjstatus location="file:~/.config/zellij/plugins/zjstatus.wasm"
-    zellij-forgot location="file:~/.config/zellij/plugins/zellij_forgot.wasm" {
+    zjstatus location="https://github.com/dj95/zjstatus/releases/download/v0.22.0/zjstatus.wasm"
+    zellij-forgot location="https://github.com/karimould/zellij-forgot/releases/download/0.4.2/zellij_forgot.wasm" {
         "LOAD_ZELLIJ_BINDINGS" "true"
     }
-    room location="file:~/.config/zellij/plugins/room.wasm"
-    zessionizer location="file:~/.config/zellij/plugins/zessionizer.wasm" {
-        scan_paths "/home/johannes/Repos"
-        scan_depth "4"
-        cwd "/home/johannes"
-        theme "catppuccin-mocha"
-    }
+
+    navigator location="https://github.com/hiasr/vim-zellij-navigator/releases/download/0.3.0/vim-zellij-navigator.wasm"
 }
 
 // === LAYOUT SETTINGS ===
