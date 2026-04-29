@@ -1,59 +1,97 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
 {
-    "agent_servers": {
-        "opencode": {
-            "type": "registry"
-        }
+  "agent_servers": {
+    "pi-acp": {
+      "type": "registry"
     },
-    "telemetry": {
-        "diagnostics": false,
-        "metrics": false
+    "opencode": {
+      "type": "registry"
     },
-    "icon_theme": {
-        "mode": "system",
-        "light": "Catppuccin Latte",
-        "dark": "Catppuccin Mocha"
+    "gemini": {
+      "type": "registry"
     },
-    "buffer_font_family": "FiraCode Nerd Font",
-    "base_keymap": "JetBrains",
-    "ui_font_size": 14,
-    "buffer_font_size": 14.0,
-    "theme": {
-        "mode": "system",
-        "light": "Catppuccin Latte",
-        "dark": "Catppuccin Mocha"
+    "cursor": {
+      "type": "registry"
     },
-    "vim_mode": true,
-    "cursor_blink": false,
-    "relative_line_numbers": "enabled",
-    "current_line_highlight": "line",
-    "vertical_scroll_margin": 8,
-    "scroll_beyond_last_line": "vertical_scroll_margin",
-    "use_smartcase_search": true,
-    "autosave": "on_focus_change",
-    "soft_wrap": "editor_width",
-    "tab_size": 4,
-    "hard_tabs": false,
-    "load_direnv": "direct",
-    "command_aliases": {
-        "W": "w",
-        "Wq": "wq",
-        "WQ": "wq",
-        "Q": "q"
-    },
-    "tabs": {
-        "file_icons": true,
-        "git_status": true,
-        "show_diagnostics": "all"
-    },
-    "minimap": {
-        "show": "never"
-    },
-    "scrollbar": {
-        "show": "never"
-    },
-    "vim": {
-        "use_system_clipboard": "on_yank",
-        "use_smartcase_find": true,
-        "toggle_relative_line_numbers": true
+    "codex-acp": {
+      "type": "registry"
     }
+  },
+  "collaboration_panel": {
+    "button": false
+  },
+  "agent": {
+    "dock": "right",
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "project_panel": {
+    "dock": "left"
+  },
+  "status_bar": {
+    "show_active_file": true
+  },
+  "title_bar": {
+    "show_menus": true,
+    "show_branch_status_icon": true
+  },
+  "tab_bar": {
+    "show_pinned_tabs_in_separate_row": true
+  },
+  "preview_tabs": {
+    "enable_preview_from_file_finder": true,
+    "enable_preview_multibuffer_from_code_navigation": true
+  },
+  "proxy": "",
+  "edit_predictions": {
+    "ollama": {
+      "prompt_format": "qwen",
+      "model": "qwen3.5:9b"
+    },
+    "provider": "zed"
+  },
+  "tabs": {
+    "file_icons": true,
+    "git_status": true,
+    "show_diagnostics": "errors"
+  },
+  "document_symbols": "on",
+  "document_folding_ranges": "on",
+  "semantic_tokens": "full",
+  "indent_guides": {
+    "background_coloring": "indent_aware"
+  },
+  "soft_wrap": "prefer_line",
+  "vim": {
+    "use_system_clipboard": "on_yank"
+  },
+  "relative_line_numbers": "enabled",
+  "vim_mode": true,
+  "base_keymap": "None",
+  "ui_font_family": "Rubik",
+  "buffer_font_family": "JetBrains Mono",
+  "icon_theme": {
+    "mode": "system",
+    "light": "Catppuccin Latte",
+    "dark": "Catppuccin Mocha"
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+  "redact_private_values": true,
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "system",
+    "light": "Catppuccin Latte",
+    "dark": "Catppuccin Mocha",
+  },
 }
