@@ -7,6 +7,21 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "context_servers": {
+    "mcp-server-context7": {
+      "enabled": true,
+      "remote": false,
+      "settings": {
+        "context7_api_key": ""
+      }
+    }
+  },
+  "outline_panel": {
+    "dock": "left"
+  },
+  "git_panel": {
+    "dock": "left"
+  },
   "agent_servers": {
     "pi-acp": {
       "type": "registry"
@@ -25,6 +40,7 @@
     }
   },
   "collaboration_panel": {
+    "dock": "left",
     "button": false
   },
   "agent": {
@@ -76,7 +92,7 @@
   "vim_mode": true,
   "base_keymap": "None",
   "ui_font_family": "Rubik",
-  "buffer_font_family": "JetBrains Mono",
+  "buffer_font_family": "JetBrainsMono Nerd Font",
   "icon_theme": {
     "mode": "system",
     "light": "Catppuccin Latte",
