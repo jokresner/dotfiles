@@ -3,6 +3,7 @@
 import QtQuick
 import Quickshell
 import qs.Bar
+import qs.Widgets
 
 ShellRoot {
     id: root
@@ -26,6 +27,9 @@ ShellRoot {
             }
         }
     }
+    ThemeSwitcherWindow {}
+    WallpaperSwitcherWindow {}
+
     Component.onCompleted: {
         Quickshell.watchFiles = true
         Qt.callLater(updateBars)

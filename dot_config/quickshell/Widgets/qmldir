@@ -9,3 +9,5 @@ AudioWidget 1.0 AudioWidget.qml
 TrayWidget 1.0 TrayWidget.qml
 NiriWorkspaceWidget 1.0 NiriWorkspaceWidget.qml
 HyprlandWorkspaceWidget 1.0 HyprlandWorkspaceWidget.qml
+ThemeSwitcherWindow 1.0 ThemeSwitcherWindow.qml
+WallpaperSwitcherWindow 1.0 WallpaperSwitcherWindow.qml

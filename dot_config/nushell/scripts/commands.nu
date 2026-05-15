@@ -32,7 +32,7 @@ def capture-foreign-env [
 }
 
 def --env y [...args] {
-	let tmp = ($nu.temp-path | path join $"yazi-cwd.(random chars).txt")
+	let tmp = ($nu.temp-dir | path join $"yazi-cwd.(random chars).txt")
 	touch $tmp
 	yazi ...$args --cwd-file $tmp
 	let cwd = (open $tmp)
