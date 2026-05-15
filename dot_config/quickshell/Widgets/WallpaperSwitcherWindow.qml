@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import Quickshell.Widgets as QSW
 import Quickshell.Io
 import qs.Theme
 
@@ -8,27 +9,63 @@ FloatingWindow {
     id: win
     title: "Wallpaper Switcher"
     visible: false
-    implicitWidth: 920
-    implicitHeight: 600
+    implicitWidth: 1120
+    implicitHeight: 520
     color: "transparent"
 
     property string scriptsDir: Quickshell.env("HOME") + "/.config/nushell/scripts"
     property var wallpapers: []
     property string currentWallpaper: "—"
-    property string selectedWallpaper: currentWallpaper
-    property string searchText: ""
-    property var filteredWallpapers: wallpapers.filter(function(path) {
-        return searchText === "" || path.toLowerCase().indexOf(searchText.toLowerCase()) !== -1
-    })
+    property int selectedIndex: 0
+    property string selectedWallpaper: wallpapers.length > 0 ? wallpapers[selectedIndex] : ""
+    readonly property int cellWidth: 520
+    property bool mouseWasInside: false
 
     function fileUrl(path) {
         if (!path || path === "—") return ""
         return "file://" + path
     }
 
-    function open() { visible = true; refresh(); search.forceActiveFocus() }
-    function toggle() { visible = !visible; if (visible) { refresh(); search.forceActiveFocus() } }
-    function refresh() { wallpaperState.running = true; wallpaperList.running = true }
+    function clampIndex(index) {
+        if (wallpapers.length === 0) return 0
+        return ((index % wallpapers.length) + wallpapers.length) % wallpapers.length
+    }
+
+    function selectIndex(index) {
+        if (wallpapers.length === 0) return
+        selectedIndex = clampIndex(index)
+    }
+
+    function selectPath(path) {
+        const idx = wallpapers.indexOf(path)
+        if (idx >= 0) selectIndex(idx)
+    }
+
+    function open() {
+        mouseWasInside = false
+        visible = true
+        refresh()
+        keyScope.forceActiveFocus()
+    }
+
+    function toggle() {
+        visible = !visible
+        if (visible) {
+            mouseWasInside = false
+            refresh()
+            keyScope.forceActiveFocus()
+        }
+    }
+
+    function refresh() {
+        wallpaperState.running = true
+        wallpaperList.running = true
+    }
+
+    function applySelected() {
+        if (selectedWallpaper) runWallpaper(["--set", selectedWallpaper])
+    }
+
     function runWallpaper(args) {
         wallpaperApply.command = [scriptsDir + "/wallpaper-switch.nu"].concat(args)
         wallpaperApply.running = true
@@ -41,248 +78,179 @@ FloatingWindow {
         function random() { win.runWallpaper(["--random"]) }
     }
 
-    Rectangle {
+    Item {
+        id: keyScope
         anchors.fill: parent
-        radius: 18
-        color: Qt.rgba(Theme.base.r, Theme.base.g, Theme.base.b, 0.94)
-        border.color: Theme.surface1
-        border.width: 1
+        focus: win.visible
 
-        ColumnLayout {
+        Keys.onPressed: function(event) {
+            if (event.key === Qt.Key_Left || event.key === Qt.Key_H) {
+                win.selectIndex(win.selectedIndex - 1)
+                event.accepted = true
+            } else if (event.key === Qt.Key_Right || event.key === Qt.Key_L) {
+                win.selectIndex(win.selectedIndex + 1)
+                event.accepted = true
+            } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter || event.key === Qt.Key_Space) {
+                win.applySelected()
+                event.accepted = true
+            } else if (event.key === Qt.Key_Escape) {
+                win.visible = false
+                event.accepted = true
+            } else if (event.key === Qt.Key_R) {
+                win.runWallpaper(["--random"])
+                event.accepted = true
+            }
+        }
+
+        MouseArea {
             anchors.fill: parent
-            anchors.margins: 18
-            spacing: 14
+            hoverEnabled: true
+            acceptedButtons: Qt.NoButton
+            onEntered: win.mouseWasInside = true
+            onExited: if (win.mouseWasInside) win.visible = false
+        }
 
-            RowLayout {
-                Layout.fillWidth: true
-                Text {
-                    Layout.fillWidth: true
-                    text: "󰸉  Wallpaper"
-                    font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontPixelSize + 8
-                    color: Theme.text
-                }
-                Text {
-                    text: "×"
-                    font.family: Theme.fontFamily
-                    font.pixelSize: Theme.fontPixelSize + 10
-                    color: Theme.subtext0
-                    MouseArea { anchors.fill: parent; anchors.margins: -8; onClicked: win.visible = false }
-                }
+        // Transparent glass layer: Hyprland blur handles the background behind this window.
+        Rectangle {
+            anchors.fill: parent
+            radius: 34
+            color: Qt.rgba(Theme.base.r, Theme.base.g, Theme.base.b, 0.13)
+            border.color: Qt.rgba(Theme.surface1.r, Theme.surface1.g, Theme.surface1.b, 0.38)
+            border.width: 1
+        }
+
+        Item {
+            id: carousel
+            anchors.fill: parent
+            anchors.leftMargin: 8
+            anchors.rightMargin: 8
+            anchors.topMargin: 24
+            anchors.bottomMargin: 70
+            clip: false
+
+            function pathForOffset(offset) {
+                if (win.wallpapers.length === 0) return ""
+                return win.wallpapers[win.clampIndex(win.selectedIndex + offset)]
             }
 
-            Text {
-                Layout.fillWidth: true
-                text: "Current: " + win.currentWallpaper
-                elide: Text.ElideMiddle
-                font.family: Theme.fontFamily
-                font.pixelSize: Theme.fontPixelSize
-                color: Theme.subtext1
-            }
+            Repeater {
+                model: [-1, 0, 1]
 
-            RowLayout {
-                Layout.fillWidth: true
-                spacing: 10
-                SwitchButton { text: "Random"; onClicked: win.runWallpaper(["--random"]) }
-                SwitchButton { text: "Apply selected"; onClicked: if (win.selectedWallpaper && win.selectedWallpaper !== "—") win.runWallpaper(["--set", win.selectedWallpaper]) }
-                SwitchButton { text: "Reload list"; onClicked: wallpaperList.running = true }
+                Item {
+                    id: cell
+                    property int offset: modelData
+                    property bool centered: offset === 0
+                    property string wallpaperPath: carousel.pathForOffset(offset)
+                    property bool current: wallpaperPath === win.currentWallpaper
+                    width: centered ? 610 : 500
+                    height: centered ? 390 : 320
+                    x: carousel.width / 2 - width / 2 + offset * 300
+                    y: carousel.height / 2 - height / 2
+                    z: centered ? 20 : 10
 
-                Rectangle {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 34
-                    radius: 10
-                    color: Theme.surface0
-                    border.color: Theme.surface1
+                    Behavior on x { NumberAnimation { duration: 140; easing.type: Easing.OutCubic } }
+                    Behavior on y { NumberAnimation { duration: 140; easing.type: Easing.OutCubic } }
+                    Behavior on width { NumberAnimation { duration: 130; easing.type: Easing.OutCubic } }
+                    Behavior on height { NumberAnimation { duration: 130; easing.type: Easing.OutCubic } }
 
-                    TextInput {
-                        id: search
+                    QSW.ClippingRectangle {
+                        id: card
                         anchors.fill: parent
-                        anchors.leftMargin: 12
-                        anchors.rightMargin: 12
-                        verticalAlignment: TextInput.AlignVCenter
-                        text: win.searchText
-                        color: Theme.text
-                        selectionColor: Theme.mauve
-                        selectedTextColor: Theme.base
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontPixelSize
-                        clip: true
-                        onTextChanged: win.searchText = text
-                        Keys.onPressed: function(event) {
-                            if (event.key === Qt.Key_Escape) {
-                                if (text.length > 0) text = ""
-                                else win.visible = false
-                                event.accepted = true
-                            } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                                if (win.selectedWallpaper && win.selectedWallpaper !== "—") win.runWallpaper(["--set", win.selectedWallpaper])
-                                event.accepted = true
-                            }
+                        radius: centered ? 30 : 26
+                        color: Theme.crust
+                        border.color: centered ? Theme.mauve : Qt.rgba(Theme.surface1.r, Theme.surface1.g, Theme.surface1.b, 0.55)
+                        border.width: centered ? 3 : 1
+                        antialiasing: true
+                        contentUnderBorder: true
+                        contentInsideBorder: false
+
+                        Behavior on border.color { ColorAnimation { duration: 100 } }
+
+                        Image {
+                            anchors.fill: parent
+                            source: win.fileUrl(cell.wallpaperPath)
+                            fillMode: Image.PreserveAspectCrop
+                            asynchronous: true
+                            cache: true
+                            retainWhileLoading: true
+                            smooth: true
+                            mipmap: true
                         }
-                    }
-
-                    Text {
-                        anchors.left: parent.left
-                        anchors.leftMargin: 12
-                        anchors.verticalCenter: parent.verticalCenter
-                        visible: search.text.length === 0
-                        text: "Search wallpapers…"
-                        font.family: Theme.fontFamily
-                        font.pixelSize: Theme.fontPixelSize
-                        color: Theme.overlay1
-                    }
-                }
-            }
-
-            RowLayout {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                spacing: 14
-
-                Rectangle {
-                    Layout.preferredWidth: 380
-                    Layout.fillHeight: true
-                    radius: 12
-                    color: Qt.rgba(Theme.surface0.r, Theme.surface0.g, Theme.surface0.b, 0.45)
-                    border.color: Theme.surface1
-                    clip: true
-
-                    ColumnLayout {
-                        anchors.fill: parent
-                        anchors.margins: 10
-                        spacing: 8
 
                         Rectangle {
-                            Layout.fillWidth: true
-                            Layout.preferredHeight: 260
-                            radius: 10
-                            color: Theme.crust
-                            border.color: Theme.surface1
-                            clip: true
-
-                            Image {
-                                anchors.fill: parent
-                                anchors.margins: 1
-                                source: win.fileUrl(win.selectedWallpaper)
-                                fillMode: Image.PreserveAspectCrop
-                                asynchronous: true
-                                cache: false
+                            visible: cell.current
+                            anchors.top: parent.top
+                            anchors.right: parent.right
+                            anchors.margins: 16
+                            width: 36
+                            height: 36
+                            radius: 18
+                            color: Qt.rgba(Theme.green.r, Theme.green.g, Theme.green.b, 0.92)
+                            Text {
+                                anchors.centerIn: parent
+                                text: "✓"
+                                font.family: Theme.fontFamily
+                                font.pixelSize: Theme.fontPixelSize + 3
+                                color: Theme.base
                             }
-                        }
-
-                        Text {
-                            Layout.fillWidth: true
-                            text: win.selectedWallpaper ? win.selectedWallpaper.split('/').pop() : "No wallpaper selected"
-                            wrapMode: Text.WordWrap
-                            maximumLineCount: 3
-                            elide: Text.ElideMiddle
-                            font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontPixelSize
-                            color: Theme.text
-                        }
-
-                        Text {
-                            Layout.fillWidth: true
-                            text: win.selectedWallpaper
-                            wrapMode: Text.WordWrap
-                            maximumLineCount: 4
-                            elide: Text.ElideMiddle
-                            font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontPixelSize - 2
-                            color: Theme.overlay2
                         }
                     }
-                }
 
-                Rectangle {
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    radius: 12
-                    color: Qt.rgba(Theme.surface0.r, Theme.surface0.g, Theme.surface0.b, 0.45)
-                    border.color: Theme.surface1
-                    clip: true
-
-                    ColumnLayout {
+                    MouseArea {
                         anchors.fill: parent
-                        anchors.margins: 8
-                        spacing: 6
-
-                        Text {
-                            Layout.fillWidth: true
-                            text: win.filteredWallpapers.length + " / " + win.wallpapers.length + " wallpapers"
-                            font.family: Theme.fontFamily
-                            font.pixelSize: Theme.fontPixelSize - 2
-                            color: Theme.overlay2
-                        }
-
-                        ListView {
-                            id: listView
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
-                            spacing: 4
-                            model: win.filteredWallpapers
-                            clip: true
-                            delegate: Rectangle {
-                                width: ListView.view.width
-                                height: 36
-                                radius: 8
-                                property bool isSelected: modelData === win.selectedWallpaper
-                                property bool isCurrent: modelData === win.currentWallpaper
-                                color: isSelected ? Theme.surface2 : (mouse.containsMouse ? Theme.surface1 : "transparent")
-                                border.color: isCurrent ? Theme.green : "transparent"
-                                border.width: isCurrent ? 1 : 0
-
-                                RowLayout {
-                                    anchors.fill: parent
-                                    anchors.leftMargin: 10
-                                    anchors.rightMargin: 10
-                                    spacing: 8
-
-                                    Text {
-                                        text: isCurrent ? "✓" : ""
-                                        Layout.preferredWidth: 16
-                                        font.family: Theme.fontFamily
-                                        font.pixelSize: Theme.fontPixelSize
-                                        color: Theme.green
-                                    }
-                                    Text {
-                                        Layout.fillWidth: true
-                                        text: modelData.split('/').pop()
-                                        elide: Text.ElideMiddle
-                                        font.family: Theme.fontFamily
-                                        font.pixelSize: Theme.fontPixelSize - 1
-                                        color: isSelected ? Theme.base : Theme.text
-                                    }
-                                }
-
-                                MouseArea {
-                                    id: mouse
-                                    anchors.fill: parent
-                                    hoverEnabled: true
-                                    onClicked: win.selectedWallpaper = modelData
-                                    onDoubleClicked: win.runWallpaper(["--set", modelData])
-                                }
-                            }
+                        onClicked: {
+                            if (cell.centered) win.applySelected()
+                            else win.selectIndex(win.selectedIndex + cell.offset)
+                            keyScope.forceActiveFocus()
                         }
                     }
                 }
             }
         }
+
+        Rectangle {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            anchors.leftMargin: 42
+            anchors.rightMargin: 42
+            anchors.bottomMargin: 22
+            height: 48
+            radius: 20
+            color: Qt.rgba(Theme.crust.r, Theme.crust.g, Theme.crust.b, 0.42)
+            border.color: Qt.rgba(Theme.surface1.r, Theme.surface1.g, Theme.surface1.b, 0.45)
+
+            RowLayout {
+                anchors.fill: parent
+                anchors.leftMargin: 14
+                anchors.rightMargin: 14
+                spacing: 12
+
+                Text {
+                    Layout.fillWidth: true
+                    text: win.selectedWallpaper ? win.selectedWallpaper.split('/').pop() : "No wallpapers found"
+                    elide: Text.ElideMiddle
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontPixelSize
+                    color: Theme.text
+                }
+
+                Text {
+                    text: (win.wallpapers.length > 0 ? (win.selectedIndex + 1) + " / " + win.wallpapers.length + " · " : "") + "←/→ · Enter apply · R random · Esc"
+                    font.family: Theme.fontFamily
+                    font.pixelSize: Theme.fontPixelSize - 2
+                    color: Theme.overlay2
+                }
+            }
+        }
     }
 
-    component SwitchButton: Rectangle {
-        id: btn
-        property alias text: label.text
-        signal clicked()
-        implicitWidth: label.implicitWidth + 26
-        implicitHeight: 34
-        radius: 10
-        color: mouse.containsMouse ? Theme.surface1 : Theme.surface0
-        border.color: Theme.surface1
-        Text { id: label; anchors.centerIn: parent; font.family: Theme.fontFamily; font.pixelSize: Theme.fontPixelSize; color: Theme.text }
-        MouseArea { id: mouse; anchors.fill: parent; hoverEnabled: true; onClicked: btn.clicked() }
+    Process {
+        id: wallpaperApply
+        running: false
+        onExited: win.refresh()
     }
 
-    Process { id: wallpaperApply; running: false; onExited: win.refresh() }
     Process {
         id: wallpaperState
         command: [scriptsDir + "/wallpaper-switch.nu", "--current"]
@@ -290,18 +258,27 @@ FloatingWindow {
         stdout: StdioCollector {
             onStreamFinished: {
                 win.currentWallpaper = text.trim() || "—"
-                if (!win.selectedWallpaper || win.selectedWallpaper === "—") win.selectedWallpaper = win.currentWallpaper
+                if (win.wallpapers.length > 0) win.selectPath(win.currentWallpaper)
             }
         }
     }
+
     Process {
         id: wallpaperList
         command: [scriptsDir + "/wallpaper-switch.nu", "--list"]
         running: false
         stdout: StdioCollector {
             onStreamFinished: {
-                try { win.wallpapers = JSON.parse(text.trim()) }
-                catch (e) { win.wallpapers = [] }
+                try {
+                    const oldSelection = win.selectedWallpaper
+                    win.wallpapers = JSON.parse(text.trim())
+                    win.selectedIndex = win.clampIndex(win.selectedIndex)
+                    if (oldSelection && win.wallpapers.indexOf(oldSelection) >= 0) win.selectPath(oldSelection)
+                    else win.selectPath(win.currentWallpaper)
+                } catch (e) {
+                    win.wallpapers = []
+                    win.selectedIndex = 0
+                }
             }
         }
     }
