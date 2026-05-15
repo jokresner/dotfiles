@@ -29,6 +29,9 @@ ShellRoot {
     }
     ThemeSwitcherWindow {}
     WallpaperSwitcherWindow {}
+    PowerMenuWindow {}
+    ClipboardPickerWindow {}
+    AppLauncherWindow {}
 
     Component.onCompleted: {
         Quickshell.watchFiles = true

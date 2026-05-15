@@ -11,3 +11,6 @@ NiriWorkspaceWidget 1.0 NiriWorkspaceWidget.qml
 HyprlandWorkspaceWidget 1.0 HyprlandWorkspaceWidget.qml
 ThemeSwitcherWindow 1.0 ThemeSwitcherWindow.qml
 WallpaperSwitcherWindow 1.0 WallpaperSwitcherWindow.qml
+PowerMenuWindow 1.0 PowerMenuWindow.qml
+ClipboardPickerWindow 1.0 ClipboardPickerWindow.qml
+AppLauncherWindow 1.0 AppLauncherWindow.qml
