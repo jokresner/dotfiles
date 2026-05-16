@@ -5,4 +5,4 @@ command = bash -c "$SHELL"
 background-opacity = 0.85
 background-blur = true
 auto-update = check
-shell-integration-features = ssh-terminfo
+shell-integration-features = ssh-env,ssh-terminfo
