@@ -201,3 +201,15 @@ automatically-unhide-macos-hidden-apps = false
 	9 = 3
 	10 = 3
 
+#[[on-window-detected]]
+#    if.app-id="com.mitchellh.ghostty"
+#    run= [
+#      "layout tiling",
+#    ]
+
+[[on-window-detected]]
+    if.app-id="com.tinyapp.TablePlus-setapp"
+    run= [
+      "layout floating",
+    ]
+

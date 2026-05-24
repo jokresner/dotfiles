@@ -111,6 +111,8 @@ overlay use ~/.config/nushell/scripts/alias-finder.nu
 
 source ~/.config/nushell/scripts/commands.nu
 
+source ~/.config/nushell/vendor/autoload/wt.nu
+
 #-----------------
 # Completion files
 #-----------------

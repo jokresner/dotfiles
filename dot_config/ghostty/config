@@ -1,8 +1,9 @@
-font-family = "JetBrainsMono Nerd Font"
-theme = "Catppuccin Mocha"
+font-family = JetBrainsMono Nerd Font
+theme = dark:Catppuccin Mocha,light:Catppuccin Latte
 window-theme = ghostty
 command = bash -c "$SHELL"
-background-opacity = 0.85
+#background-opacity = 0.85
 background-blur = true
 auto-update = check
+shell-integration = nushell
 shell-integration-features = ssh-env,ssh-terminfo

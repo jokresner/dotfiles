@@ -1,0 +1,83 @@
+layout {
+	default_tab_template {
+		children
+		pane size=1 borderless=true {
+      plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
+        // Rose Pine (mapped to Catppuccin Mocha for consistency)
+        color_text   "#cdd6f4"
+        color_bg1    "#1e1e2e"
+        color_bg2    "#181825"
+        color_fg1    "#bac2de"
+        color_fg3    "#a6adc8"
+        color_fg4    "#9399b2"
+        color_pine   "#a6e3a1" // Green
+        color_rose   "#f38ba8" // Red
+        color_foam   "#89b4fa" // Blue
+        color_gold   "#f9e2af" // Yellow
+        color_love   "#f38ba8" // Red
+        color_subtle "#6c7086" // Overlay
+        color_muted  "#585b70" // Surface2
+        color_overlay "#313244" // Surface0
+        color_orange "#fab387"
+
+        format_left   "#[fg=$text] {session} {mode}#[]"
+        format_center "{tabs}"
+        // format_right  "#[fg=$bg2]#[bg=$bg2,fg=$fg4] {command_user}@{command_host} #[bg=$bg2,fg=$fg3]#[bg=$fg3,fg=$bg1] {datetime} "
+        format_space  "#[fg=$fg1]"
+        format_hide_on_overlength "true"
+        format_precedence "lrc"
+
+        border_enabled  "false"
+        border_char     "─"
+        border_format   "#[fg=$bg1]{char}"
+        border_position "top"
+
+        hide_frame_for_single_pane "false"
+
+        mode_normal        "#[fg=$text] NORMAL "
+        mode_locked        "#[fg=$muted] LOCKED "
+        mode_pane          "#[fg=$pine,bold] PANE "
+        mode_tab           "#[fg=$rose,bold] TAB "
+        mode_scroll        "#[fg=$foam,bold] SCROLL "
+        mode_enter_search  "#[fg=$text,bold] ENT-SEARCH "
+        mode_search        "#[fg=$subtle,bold] SEARCH "
+        mode_resize        "#[fg=$gold,bold] RESIZE "
+        mode_rename_tab    "#[fg=$gold,bold] RENAME TAB "
+        mode_rename_pane   "#[fg=$gold,bold] RENAME PANE "
+        mode_move          "#[fg=$gold,bold] MOVE "
+        mode_session       "#[fg=$love,bold] SESSION "
+        mode_prompt        "#[fg=$love,bold] PROMPT "
+
+        tab_normal              "#[fg=$subtle] {index} #[fg=$subtle] {name} {floating_indicator} "
+        tab_normal_fullscreen   "#[fg=$subtle] {index} #[fg=$subtle] {name} {fullscreen_indicator} "
+        tab_normal_sync         "#[fg=$subtle] {index} #[fg=$subtle] {name} {sync_indicator} "
+        tab_active              "#[bg=$overlay,fg=$text] {index} #[bg=$overlay,fg=$text,bold] {name} {floating_indicator} "
+        tab_active_fullscreen   "#[bg=$overlay,fg=$text] {index} #[bg=$overlay,fg=$text,bold] {name} {fullscreen_indicator} "
+        tab_active_sync         "#[bg=$overlay,fg=$text] {index} #[bg=$overlay,fg=$text,bold] {name} {sync_indicator} "
+        tab_separator           " "
+
+        tab_sync_indicator       ""
+        tab_fullscreen_indicator "󰊓"
+        tab_floating_indicator   "󰹙"
+
+        notification_format_unread "#[bg=$orange,fg=$bg1]#[bg=$orange,fg=$bg1] {message} #[bg=$bg1,fg=$orange]"
+        notification_format_no_notifications ""
+        notification_show_interval "10"
+
+        command_host_command    "uname -n"
+        command_host_format     "{stdout}"
+        command_host_interval   "0"
+        command_host_rendermode "static"
+
+        command_user_command    "whoami"
+        command_user_format     "{stdout}"
+        command_user_interval   "0"
+        command_user_rendermode "static"
+
+        datetime          "{format}"
+        datetime_format   "%Y-%m-%d"
+        datetime_timezone "Europe/Berlin"
+		}
+	}
+	}
+}

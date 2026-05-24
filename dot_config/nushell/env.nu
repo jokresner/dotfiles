@@ -8,11 +8,16 @@ path add ~/go/bin
 path add ~/.local/share/bob/nvim-bin
 
 $env.SHELL = '/usr/bin/nu'
+$env.ZELLIJ_SOCKET_DIR = '/tmp/zellij'
+$env.RAINFROG_CONFIG = '~/.config/rainfrog'
 
 if ($nu.os-info.name == 'macos') {
 	path add /opt/homebrew/bin
+    path add /opt/nanobrew/prefix/bin
     path add ~/.orbstack/bin
 	path add ~/.rustup/toolchains/nightly-aarch64-apple-darwin/bin
+    path add /Applications/lux-cli.app/Contents/MacOS
+
 	$env.SHELL = '/opt/homebrew/bin/nu'
     $env.XDG_RUNTIME_DIR = "/tmp/"
 }

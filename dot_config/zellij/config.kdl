@@ -33,7 +33,7 @@ keybinds {
             LaunchOrFocusPlugin "zsm" {
                 floating true
                 move_to_focused_tab true
-                default_layout "default"
+                default_layout "tabs"
                 show_resurrectable_sessions true
                 base_paths "/home/johannes/Repos|/home/johannes"
             }
@@ -58,8 +58,8 @@ keybinds {
             };
         }
         bind "Ctrl k" {
-            MessagePlugin "navigator" {
-                name "move_focus_or_tab";
+        MessagePlugin "navigator" {
+            name "move_focus_or_tab";
                 payload "up";
                 move_mod "ctrl";
             };
@@ -124,10 +124,11 @@ plugins {
     }
 
     navigator location="https://github.com/hiasr/vim-zellij-navigator/releases/download/0.3.0/vim-zellij-navigator.wasm"
+    zsm location="https://github.com/liam-mackie/zsm/releases/download/v0.4.1/zsm.wasm"
 }
 
 // === LAYOUT SETTINGS ===
-default_layout "default"
+default_layout "tabs"
 
 // === EDITOR INTEGRATION ===
 scrollback_editor "nvim +$"

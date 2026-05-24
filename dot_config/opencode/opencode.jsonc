@@ -2,8 +2,21 @@
     "$schema": "https://opencode.ai/config.json",
     "plugin": [
         "opencode-openai-codex-auth",
-        "context-mode"
+        "context-mode",
+        "cursor-acp"
     ],
+    "mcp": {
+        "metamcp": {
+            "type": "remote",
+            "url": "https://mcp.home.jokresner.de/metamcp/all/mcp"
+        },
+        "context-mode": {
+            "type": "local",
+            "command": [
+                "context-mode"
+            ]
+        }
+    },
     "provider": {
         "openai": {
             "options": {

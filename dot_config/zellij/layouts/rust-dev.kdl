@@ -1,0 +1,24 @@
+// layouts/rust-dev.kdl
+layout {
+    pane split_direction="vertical" {
+        // Left side: Editor
+        pane size="60%" {
+            command "nvim"
+            args "."
+        }
+        // Right side: Split horizontally
+        pane split_direction="horizontal" {
+            // Top right: Build/Test Runner
+            pane {
+                name "rust-runner"
+                command "bash"
+                args "-c" "clear; echo 'Ready to run tests or build (e.g., cargo test, cargo build)'"
+            }
+            // Bottom right: General Commands
+            pane {
+                name "rust-commands"
+                command "bash"
+            }
+        }
+    }
+}
