@@ -101,8 +101,7 @@ copy_on_select true
 show_startup_tips false
 session_serialization true
 pane_viewport_serialization true
-
-
+pane_frames false
 
 plugins {
     tab-bar location="zellij:tab-bar"

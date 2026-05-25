@@ -1,6 +1,6 @@
 layout {
     pane size=1 borderless=true {
-        plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
+        plugin location="zjstatus" {
             // Catppuccin Mocha Palette
             color_rosewater "#f5e0dc"
             color_flamingo  "#f2cdcd"
