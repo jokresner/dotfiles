@@ -59,3 +59,18 @@ def man [topic: string] {
     ^man $topic | bat -l man -p
 }
 
+def chezmoi-add [] {
+    let externals = (
+        open ~/.local/share/chezmoi/.chezmoiexternal.toml
+        | transpose path _
+        | get path
+    )
+
+    chezmoi status
+    | lines
+    | each { |line| $line | str substring 3.. | str trim }
+    | where { |path|
+        not ($externals | any { |ext| ($path == $ext) or ($path | str starts-with $"($ext)/") })
+    }
+    | each { |path| chezmoi add $"($env.HOME)/($path)" }
+}
