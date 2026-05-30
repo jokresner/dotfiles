@@ -4,7 +4,6 @@
   "defaultModel": "gpt-5.5",
   "packages": [
     "npm:pi-mcp-adapter",
-    "npm:@ollama/pi-web-search",
     "npm:pi-lens",
     "npm:context-mode",
     "npm:pi-subagents",
@@ -12,9 +11,10 @@
     "npm:@ff-labs/pi-fff",
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:@plannotator/pi-extension",
-    "npm:pi-hermes-memory"
+    "npm:pi-hermes-memory",
+    "npm:pi-web-access"
   ],
-  "theme": "catppuccin-mocha",
-  "hideThinkingBlock": false,
+  "theme": "catppuccin-latte",
+  "hideThinkingBlock": true,
   "powerline": "full"
 }
