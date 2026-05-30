@@ -1,14 +1,6 @@
 // === THEME AND UI ===
 theme "catppuccin-mocha"
 
-// === UI CUSTOMIZATION ===
-ui {
-    pane_frames {
-        rounded_corners true
-        hide true
-    }
-}
-
 // === KEYBINDINGS ===
 keybinds {
     shared_except "locked" {
@@ -58,8 +50,8 @@ keybinds {
             };
         }
         bind "Ctrl k" {
-        MessagePlugin "navigator" {
-            name "move_focus_or_tab";
+            MessagePlugin "navigator" {
+                name "move_focus_or_tab";
                 payload "up";
                 move_mod "ctrl";
             };
@@ -73,9 +65,27 @@ keybinds {
         }
 
         // Floating Apps
-        bind "Alt g" { Run "lazygit" { floating true; close_on_exit true; }; }
-        bind "Alt m" { Run "btop" { floating true; close_on_exit true; }; }
-        bind "Alt y" { Run "yazi" { floating true; close_on_exit true; }; }
+        bind "Alt g" {
+            Run "bash" {
+                args "-lc" "if command -v lazygit >/dev/null 2>&1; then exec lazygit; else printf 'Missing tool: lazygit\nInstall lazygit, then retry.\n\nPress Enter to close...'; read -r _; fi"
+                floating true
+                close_on_exit true
+            };
+        }
+        bind "Alt m" {
+            Run "bash" {
+                args "-lc" "if command -v btop >/dev/null 2>&1; then exec btop; else printf 'Missing tool: btop\nInstall btop, then retry.\n\nPress Enter to close...'; read -r _; fi"
+                floating true
+                close_on_exit true
+            };
+        }
+        bind "Alt y" {
+            Run "bash" {
+                args "-lc" "if command -v yazi >/dev/null 2>&1; then exec yazi; else printf 'Missing tool: yazi\nInstall yazi, then retry.\n\nPress Enter to close...'; read -r _; fi"
+                floating true
+                close_on_exit true
+            };
+        }
 
         // Tab Management
         bind "Alt H" { MoveTab "Left"; }
@@ -95,7 +105,6 @@ keybinds {
 
 // === COPY/PASTE BEHAVIOR ===
 copy_on_select true
-// copy_command "wl-copy"
 
 // === SESSION BEHAVIOR ===
 show_startup_tips false
@@ -104,18 +113,7 @@ pane_viewport_serialization true
 pane_frames false
 
 plugins {
-    tab-bar location="zellij:tab-bar"
-    status-bar location="zellij:status-bar"
-    strider location="zellij:strider"
-    compact-bar location="zellij:compact-bar"
     session-manager location="zellij:session-manager"
-    
-    filepicker location="zellij:strider" {
-        cwd "/"
-    }
-    configuration location="zellij:configuration"
-    plugin-manager location="zellij:plugin-manager"
-    about location="zellij:about"
 
     zjstatus location="https://github.com/dj95/zjstatus/releases/download/v0.22.0/zjstatus.wasm"
     zellij-forgot location="https://github.com/karimould/zellij-forgot/releases/download/0.4.2/zellij_forgot.wasm" {

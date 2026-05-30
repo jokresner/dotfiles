@@ -1,4 +1,5 @@
 layout {
+    default_tab_template {
     pane size=1 borderless=true {
         plugin location="zjstatus" {
             // Catppuccin Mocha Palette
@@ -31,15 +32,13 @@ layout {
 
             format_left   "{mode} #[fg=$overlay0,bold]{session}"
             format_center "{tabs}"
-            format_right  "{command_git_branch} #[fg=$overlay0,bold] {datetime}"
+            format_right  "#[fg=$overlay0,bold] {datetime}"
             format_space  ""
 
             border_enabled  "false"
             border_char     "─"
             border_format   "#[fg=$overlay0]{char}"
             border_position "top"
-
-            hide_frame_for_single_pane "true"
 
             mode_normal        "#[fg=$green]█"
             mode_locked        "#[fg=$red]█"
@@ -68,16 +67,11 @@ layout {
             // Separator between tabs
             tab_separator           "  "
 
-            // Git Branch Command
-            command_git_branch_command     "bash -c \"git rev-parse --abbrev-ref HEAD 2>/dev/null | xargs -I {} echo ' {}'\""
-            command_git_branch_format      "#[fg=$blue,bold] {stdout} "
-            command_git_branch_interval    "30"
-            command_git_branch_rendermode  "static"
-
             datetime        "{format} "
             datetime_format "%H:%M"
             datetime_timezone "Europe/Berlin"
         }
     }
-    pane
+    children
+}
 }
