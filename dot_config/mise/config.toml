@@ -6,6 +6,7 @@ python = "latest"
 uv = "0.9.28"
 rust = "nightly"
 "cargo:cargo-binstall" = "latest"
+"github:can1357/oh-my-pi" = "latest"
 
 [settings.cargo]
 binstall = true
