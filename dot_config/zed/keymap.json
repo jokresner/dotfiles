@@ -1,0 +1,129 @@
+[
+  {
+    "context": "VimControl && !menu",
+    "use_key_equivalents": true,
+    "bindings": {
+      "space space": "file_finder::Toggle",
+      "space w": "workspace::Save",
+      "space q q": ["pane::CloseActiveItem", { "close_pinned": false }],
+      "space q Q": "workspace::CloseWindow",
+
+      "space f f": "file_finder::Toggle",
+      "space f g": "pane::DeploySearch",
+      "space f r": ["projects::OpenRecent", { "create_new_window": false }],
+      "space f s": "workspace::Save",
+      "space f S": "workspace::SaveAll",
+
+      "space ,": "tab_switcher::Toggle",
+      "space b b": "tab_switcher::Toggle",
+      "space b d": ["pane::CloseActiveItem", { "close_pinned": false }],
+      "space b n": "pane::ActivateNextItem",
+      "space b p": "pane::ActivatePreviousItem",
+
+      "space s s": "pane::DeploySearch",
+      "space s r": ["pane::DeploySearch", { "replace_enabled": true }],
+      "space s d": "diagnostics::Deploy",
+      "space s p": "project_symbols::Toggle",
+
+      "space c a": "editor::ToggleCodeActions",
+      "space c r": "editor::Rename",
+      "space c f": "editor::Format",
+      "space c s": "outline::Toggle",
+      "space c h": "editor::Hover",
+      "space c d": "editor::GoToDefinition",
+      "space c D": "editor::GoToTypeDefinition",
+      "space c i": "editor::GoToImplementation",
+      "space c R": "editor::FindAllReferences",
+
+      "space d n": ["editor::GoToDiagnostic", { "severity": { "min": "hint", "max": "error" } }],
+      "space d p": ["editor::GoToPreviousDiagnostic", { "severity": { "min": "hint", "max": "error" } }],
+      "space d d": "diagnostics::Deploy",
+
+      "space g s": "git_panel::ToggleFocus",
+      "space g b": "editor::BlameHover",
+      "space g h": "editor::ToggleSelectedDiffHunks",
+      "space g H": "editor::ExpandAllDiffHunks",
+      "space g n": "editor::GoToHunk",
+      "space g p": "editor::GoToPreviousHunk",
+
+      "space u e": "project_panel::ToggleFocus",
+      "space u g": "git_panel::ToggleFocus",
+      "space u d": "debug_panel::ToggleFocus",
+      "space u t": "terminal_panel::Toggle",
+      "space u a": "workspace::ToggleAllDocks",
+      "space u z": "workspace::ToggleZoom",
+      "space u h": "editor::ToggleInlayHints",
+      "space u c": "theme_selector::Toggle",
+
+      "space r s": "vim::Substitute",
+      "space r shift-s": "vim::SubstituteLine",
+
+      "space x x": "task::Spawn",
+      "space x r": ["task::Rerun", { "reevaluate_context": true }],
+
+      "space a a": "agent::ToggleFocus",
+      "space a i": "assistant::InlineAssist",
+
+      "space p h": "workspace::ActivatePaneLeft",
+      "space p l": "workspace::ActivatePaneRight",
+      "space p k": "workspace::ActivatePaneUp",
+      "space p j": "workspace::ActivatePaneDown",
+      "space p v": "pane::SplitRight",
+      "space p s": "pane::SplitDown",
+
+      "space m m": "markdown::OpenPreview",
+
+      "space D b": "editor::ToggleBreakpoint",
+      "space D s": "debugger::Start",
+      "space D c": "debugger::Continue",
+      "space D r": "debugger::Rerun",
+      "space D x": "debugger::Stop",
+      "space D o": "debugger::StepOver",
+      "space D i": "debugger::StepInto",
+      "space D O": "debugger::StepOut"
+    }
+  },
+  {
+    "context": "vim_mode == normal || vim_mode == visual",
+    "bindings": {
+      "s": "vim::PushSneak",
+      "shift-s": "vim::PushSneakBackward"
+    }
+  },
+  {
+    "context": "EmptyPane || SharedScreen",
+    "use_key_equivalents": true,
+    "bindings": {
+      "space space": "file_finder::Toggle",
+      "space f f": "file_finder::Toggle",
+      "space f g": "pane::DeploySearch",
+      "space f r": ["projects::OpenRecent", { "create_new_window": false }],
+      "space u e": "project_panel::ToggleFocus",
+      "space u t": "terminal_panel::Toggle",
+      "space a a": "agent::ToggleFocus",
+      "space x x": "task::Spawn"
+    }
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "space space": "file_finder::Toggle",
+      "q": "project_panel::ToggleFocus",
+      "a": "project_panel::NewFile",
+      "A": "project_panel::NewDirectory",
+      "r": "project_panel::Rename",
+      "d": ["project_panel::Trash", { "skip_prompt": false }],
+      "y": "project_panel::CopyPath",
+      "Y": "workspace::CopyRelativePath"
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-h": ["terminal::SendKeystroke", "ctrl-h"],
+      "ctrl-j": ["terminal::SendKeystroke", "ctrl-j"],
+      "ctrl-k": ["terminal::SendKeystroke", "ctrl-k"],
+      "ctrl-l": ["terminal::SendKeystroke", "ctrl-l"]
+    }
+  }
+]

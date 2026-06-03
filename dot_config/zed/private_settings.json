@@ -1,113 +1,236 @@
-// Zed settings
-//
-// For information on how to configure Zed, see the Zed
-// documentation: https://zed.dev/docs/configuring-zed
-//
-// To see all of Zed's default settings without changing your
-// custom settings, run `zed: open default settings` from the
-// command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "context_servers": {
-    "mcp-server-context7": {
-      "enabled": true,
-      "remote": false,
-      "settings": {
-        "context7_api_key": ""
-      }
-    }
-  },
-  "outline_panel": {
-    "dock": "left"
-  },
-  "git_panel": {
-    "dock": "left"
-  },
-  "agent_servers": {
-    "pi-acp": {
-      "type": "registry"
-    },
-    "opencode": {
-      "type": "registry"
-    },
-    "gemini": {
-      "type": "registry"
-    },
-    "cursor": {
-      "type": "registry"
-    },
-    "codex-acp": {
-      "type": "registry"
-    }
-  },
-  "collaboration_panel": {
-    "dock": "left",
-    "button": false
-  },
-  "agent": {
-    "dock": "right",
-    "favorite_models": [],
-    "model_parameters": []
-  },
   "project_panel": {
     "dock": "left"
   },
-  "status_bar": {
-    "show_active_file": true
+  "collaboration_panel": {
+    "button": false
   },
-  "title_bar": {
-    "show_menus": true,
-    "show_branch_status_icon": true
-  },
-  "tab_bar": {
-    "show_pinned_tabs_in_separate_row": true
-  },
-  "preview_tabs": {
-    "enable_preview_from_file_finder": true,
-    "enable_preview_multibuffer_from_code_navigation": true
-  },
-  "proxy": "",
-  "edit_predictions": {
-    "ollama": {
-      "prompt_format": "qwen",
-      "model": "qwen3.5:9b"
-    },
-    "provider": "zed"
-  },
-  "tabs": {
-    "file_icons": true,
-    "git_status": true,
-    "show_diagnostics": "errors"
-  },
-  "document_symbols": "on",
-  "document_folding_ranges": "on",
-  "semantic_tokens": "full",
-  "indent_guides": {
-    "background_coloring": "indent_aware"
-  },
-  "soft_wrap": "prefer_line",
-  "vim": {
-    "use_system_clipboard": "on_yank"
-  },
-  "relative_line_numbers": "enabled",
+  "base_keymap": "VSCode",
   "vim_mode": true,
-  "base_keymap": "None",
-  "ui_font_family": "Rubik",
-  "buffer_font_family": "JetBrainsMono Nerd Font",
-  "icon_theme": {
-    "mode": "system",
-    "light": "Catppuccin Latte",
-    "dark": "Catppuccin Mocha"
+  "vim": {
+    "default_mode": "normal",
+    "use_system_clipboard": "always",
+    "use_smartcase_find": true,
+    "use_regex_search": true,
+    "gdefault": false,
+    "toggle_relative_line_numbers": false,
+    "highlight_on_yank_duration": 200
   },
-  "telemetry": {
-    "diagnostics": false,
-    "metrics": false
-  },
-  "redact_private_values": true,
-  "ui_font_size": 16,
-  "buffer_font_size": 15,
   "theme": {
     "mode": "system",
-    "light": "Catppuccin Latte",
     "dark": "Catppuccin Mocha",
+    "light": "Catppuccin Latte"
   },
+  "icon_theme": {
+    "mode": "system",
+    "dark": "Catppuccin Mocha",
+    "light": "Catppuccin Latte"
+  },
+  "auto_install_extensions": {
+    "catppuccin": true,
+    "catppuccin-icons": true,
+    "lua": true,
+    "php": true,
+    "typst": true
+  },
+  "telemetry": {
+    "metrics": false,
+    "diagnostics": false
+  },
+  "features": {
+    "edit_predictions": {
+      "provider": "zed"
+    }
+  },
+  "show_edit_predictions": true,
+  "edit_predictions": {
+    "disabled_globs": [
+      "**/.env*",
+      "**/*.pem",
+      "**/*.key",
+      "**/*.cert",
+      "**/*.crt",
+      "**/.dev.vars",
+      "**/secrets.yml",
+      "**/secrets.yaml",
+      "**/*secret*",
+      "**/*credential*"
+    ]
+  },
+  "buffer_font_family": ".ZedMono",
+  "buffer_font_size": 15,
+  "buffer_line_height": "comfortable",
+  "ui_font_size": 16,
+  "cursor_blink": false,
+  "relative_line_numbers": "enabled",
+  "vertical_scroll_margin": 8,
+  "horizontal_scroll_margin": 8,
+  "scroll_beyond_last_line": "off",
+  "soft_wrap": "editor_width",
+  "tab_size": 4,
+  "hard_tabs": false,
+  "format_on_save": "on",
+  "formatter": "language_server",
+  "remove_trailing_whitespace_on_save": true,
+  "ensure_final_newline_on_save": true,
+  "show_completion_documentation": false,
+  "auto_signature_help": false,
+  "inlay_hints": {
+    "enabled": true,
+    "show_type_hints": true,
+    "show_parameter_hints": true,
+    "show_other_hints": true,
+    "show_background": false
+  },
+  "code_lens": "menu",
+  "git": {
+    "git_gutter": "tracked_files",
+    "inline_blame": {
+      "enabled": true
+    },
+    "hunk_style": "staged_hollow"
+  },
+  "terminal": {
+    "dock": "bottom",
+    "copy_on_select": false,
+    "keep_selection_on_copy": true,
+    "line_height": "comfortable",
+    "detect_venv": {
+      "on": {
+        "directories": [".env", "env", ".venv", "venv"],
+        "activate_script": "default"
+      }
+    }
+  },
+  "lsp": {
+    "gopls": {
+      "initialization_options": {
+        "hints": {
+          "assignVariableTypes": true,
+          "compositeLiteralFields": true,
+          "compositeLiteralTypes": true,
+          "constantValues": true,
+          "functionTypeParameters": true,
+          "parameterNames": true,
+          "rangeVariableTypes": true
+        },
+        "codelenses": {
+          "test": true,
+          "generate": true,
+          "regenerate_cgo": true,
+          "tidy": true,
+          "upgrade_dependency": true,
+          "vendor": true
+        }
+      }
+    },
+    "rust-analyzer": {
+      "initialization_options": {
+        "check": {
+          "command": "clippy"
+        },
+        "cargo": {
+          "allTargets": true
+        },
+        "inlayHints": {
+          "maxLength": null,
+          "lifetimeElisionHints": {
+            "enable": "skip_trivial",
+            "useParameterNames": true
+          },
+          "closureReturnTypeHints": {
+            "enable": "always"
+          }
+        }
+      }
+    }
+  },
+  "languages": {
+    "Lua": {
+      "tab_size": 2,
+      "hard_tabs": false,
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "stylua",
+          "arguments": [
+            "--syntax=Lua54",
+            "--respect-ignores",
+            "--stdin-filepath",
+            "{buffer_path}",
+            "-"
+          ]
+        }
+      },
+      "inlay_hints": {
+        "enabled": true,
+        "show_type_hints": true,
+        "show_parameter_hints": true,
+        "show_other_hints": true
+      }
+    },
+    "Go": {
+      "tab_size": 4,
+      "hard_tabs": true,
+      "formatter": "language_server",
+      "format_on_save": "on",
+      "inlay_hints": {
+        "enabled": true,
+        "show_type_hints": true,
+        "show_parameter_hints": true,
+        "show_other_hints": true
+      }
+    },
+    "Rust": {
+      "tab_size": 4,
+      "hard_tabs": false,
+      "formatter": "language_server",
+      "format_on_save": "on",
+      "inlay_hints": {
+        "enabled": true,
+        "show_type_hints": true,
+        "show_parameter_hints": true,
+        "show_other_hints": true
+      }
+    },
+    "JavaScript": {
+      "tab_size": 2,
+      "formatter": "language_server",
+      "format_on_save": "on"
+    },
+    "TypeScript": {
+      "tab_size": 2,
+      "formatter": "language_server",
+      "format_on_save": "on"
+    },
+    "TSX": {
+      "tab_size": 2,
+      "formatter": "language_server",
+      "format_on_save": "on"
+    },
+    "JSON": {
+      "tab_size": 2,
+      "formatter": "language_server",
+      "format_on_save": "on"
+    },
+    "YAML": {
+      "tab_size": 2,
+      "formatter": "language_server",
+      "format_on_save": "on"
+    },
+    "PHP": {
+      "tab_size": 4,
+      "formatter": "language_server",
+      "format_on_save": "on"
+    },
+    "Markdown": {
+      "soft_wrap": "editor_width",
+      "format_on_save": "off"
+    },
+    "Typst": {
+      "tab_size": 2,
+      "formatter": "language_server",
+      "format_on_save": "on"
+    }
+  }
 }
