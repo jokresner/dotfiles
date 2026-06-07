@@ -1,0 +1,61 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+
+add_newline = false
+
+format = """
+$nix_shell\
+$directory\
+${custom.git}\
+${custom.jj}\
+$cmd_duration\
+$line_break\
+$character"""
+
+[character]
+success_symbol = "❯(yellow)"
+error_symbol = "❯(yellow)"
+
+[git_status]
+disabled = true
+
+[git_branch]
+disabled = true
+
+[custom.git]
+when = "jj root >/dev/null 2>&1 && exit 1 || git rev-parse --is-inside-work-tree >/dev/null 2>&1"
+command = "starship module git_branch && starship module git_status"
+shell = ["sh", "--norc", "--noprofile"]
+style = "bold purple"
+
+[custom.jj]
+description = "The current jj status"
+when = "jj root >/dev/null 2>&1"
+symbol = " "
+style = "bold blue"
+shell = ["sh", "--norc", "--noprofile"]
+command = '''
+jj log --revisions @ --no-graph --ignore-working-copy --color always --limit 1 --template '
+  separate(" ",
+    change_id.shortest(4),
+    bookmarks,
+    "|",
+    concat(
+      if(conflict, "💥"),
+      if(divergent, "🚧"),
+      if(hidden, "👻"),
+      if(immutable, "🔒"),
+    ),
+    raw_escape_sequence("\x1b[1;32m") ++ if(empty, "(empty)"),
+    raw_escape_sequence("\x1b[1;32m") ++ coalesce(
+      truncate_end(29, description.first_line(), "…"),
+      "(no description set)",
+    ) ++ raw_escape_sequence("\x1b[0m"),
+  )
+'
+'''
+
+[directory]
+truncation_length = 4
+style = "bold cyan"
+

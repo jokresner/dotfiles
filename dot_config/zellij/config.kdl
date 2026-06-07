@@ -1,5 +1,5 @@
 // === THEME AND UI ===
-theme "catppuccin-mocha"
+// theme "catppuccin-mocha"
 
 // === KEYBINDINGS ===
 keybinds {

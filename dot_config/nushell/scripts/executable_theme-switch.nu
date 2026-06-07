@@ -45,6 +45,27 @@ def apply-theme [selected: string] {
     if (which makoctl | is-not-empty) { makoctl reload }
   }
 
+  # Btop theme
+  if ($"($home)/.config/btop/btop.conf" | path exists) {
+    bash -lc $"sed -i 's|color_theme = \".*\"|color_theme = \"($home)/.config/btop/themes/catppuccin_($choice).theme\"|' \"($home)/.config/btop/btop.conf\""
+    if ($"($home)/.local/share/chezmoi/dot_config/btop/btop.conf" | path exists) {
+      bash -lc $"sed -i 's|color_theme = \".*\"|color_theme = \"($home)/.config/btop/themes/catppuccin_($choice).theme\"|' \"($home)/.local/share/chezmoi/dot_config/btop/btop.conf\""
+    }
+  }
+
+  # Helix theme
+  if ($"($home)/.config/helix/config.toml" | path exists) {
+    bash -lc $"sed -i 's/theme = \"catppuccin_.*_transparent\"/theme = \"catppuccin_($choice)_transparent\"/' \"($home)/.config/helix/config.toml\""
+    if ($"($home)/.local/share/chezmoi/dot_config/helix/config.toml" | path exists) {
+      bash -lc $"sed -i 's/theme = \"catppuccin_.*_transparent\"/theme = \"catppuccin_($choice)_transparent\"/' \"($home)/.local/share/chezmoi/dot_config/helix/config.toml\""
+    }
+  }
+
+  # Yazi theme
+  if ($"($home)/.config/yazi" | path exists) {
+    $"[flavor]\nuse = \"catppuccin-($choice)\"\n" | save -f $"($home)/.config/yazi/theme.toml"
+  }
+
   # GTK theme, only if installed.
   if ($"/usr/share/themes/($gtk_theme)" | path exists) {
     gsettings set org.gnome.desktop.interface gtk-theme $gtk_theme
