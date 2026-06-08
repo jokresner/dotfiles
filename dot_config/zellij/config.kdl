@@ -115,7 +115,7 @@ pane_frames false
 plugins {
     session-manager location="zellij:session-manager"
 
-    zjstatus location="https://github.com/dj95/zjstatus/releases/download/v0.22.0/zjstatus.wasm"
+    zjstatus location="https://github.com/dj95/zjstatus/releases/download/v0.23.0/zjstatus.wasm"
     zellij-forgot location="https://github.com/karimould/zellij-forgot/releases/download/0.4.2/zellij_forgot.wasm" {
         "LOAD_ZELLIJ_BINDINGS" "true"
     }

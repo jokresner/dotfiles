@@ -123,6 +123,7 @@ automatically-unhide-macos-hidden-apps = false
 
 	alt-r = 'mode resize'
 	alt-i = 'mode macos'
+    alt-h = 'mode service'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#resize
 

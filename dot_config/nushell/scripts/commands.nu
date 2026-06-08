@@ -74,3 +74,11 @@ def chezmoi-add [] {
     }
     | each { |path| chezmoi add $"($env.HOME)/($path)" }
 }
+
+def gopass-save [msg = "update password store"] {
+  gopass git status
+  gopass git add .
+  gopass git commit -m $msg
+  gopass git pull --rebase
+  gopass git push
+}

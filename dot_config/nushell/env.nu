@@ -17,6 +17,7 @@ if ($nu.os-info.name == 'macos') {
     path add ~/.orbstack/bin
 	path add ~/.rustup/toolchains/nightly-aarch64-apple-darwin/bin
     path add /Applications/lux-cli.app/Contents/MacOS
+    path add /nix/var/nix/profiles/default/bin
 
 	$env.SHELL = '/opt/homebrew/bin/nu'
     $env.XDG_RUNTIME_DIR = "/tmp/"
