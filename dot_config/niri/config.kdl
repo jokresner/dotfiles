@@ -86,10 +86,9 @@ layer-rule {
 }
 
 spawn-at-startup "systemctl" "--user" "enable" "--now" "hypridle"
-spawn-at-startup "swww-daemon"
-spawn-at-startup "random_wallpaper"
+spawn-at-startup "awww-daemon"
 spawn-at-startup "trayscale" "--hide-window"
-spawn-at-startup "nextcloud" "--background"
+spawn-at-startup "owncloud"
 spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
 spawn-at-startup "quickshell"
 spawn-at-startup "mcpproxy" "serve"
@@ -158,21 +157,66 @@ window-rule {
     clip-to-geometry true
 }
     
-// Make the calendar popup floating and centered (or positioned)
+// Quickshell popups from Hyprland rules.
 window-rule {
-    match title="quickshell"
+    match app-id=r#"^org\.quickshell$"# title="^Theme Switcher$"
+    match app-id=r#"^org\.quickshell$"# title="^Wallpaper Switcher$"
+    match app-id=r#"^org\.quickshell$"# title="^Power Menu$"
+    match app-id=r#"^org\.quickshell$"# title="^Clipboard Picker$"
+    match app-id=r#"^org\.quickshell$"# title="^App Launcher$"
+
     open-floating true
-    default-column-width { fixed 250; }
-    default-window-height { fixed 280; }
+    geometry-corner-radius 34
+    clip-to-geometry true
+
+    border {
+        off
+    }
+
+    shadow {
+        off
+    }
+}
+
+window-rule {
+    match app-id=r#"^org\.quickshell$"# title="^App Launcher$"
+    match app-id=r#"^org\.quickshell$"# title="^Clipboard Picker$"
+
+    default-column-width { fixed 720; }
+    default-window-height { fixed 520; }
+}
+
+window-rule {
+    match app-id=r#"^org\.quickshell$"# title="^Wallpaper Switcher$"
+
+    default-column-width { fixed 900; }
+    default-window-height { fixed 560; }
+}
+
+window-rule {
+    match app-id=r#"^org\.quickshell$"# title="^Theme Switcher$"
+
+    default-column-width { fixed 640; }
+    default-window-height { fixed 480; }
+}
+
+window-rule {
+    match app-id=r#"^org\.quickshell$"# title="^Power Menu$"
+
+    default-column-width { fixed 420; }
+    default-window-height { fixed 320; }
 }
 
 binds {
     Mod+Shift+7{ show-hotkey-overlay; }
     Mod+Return { spawn "ghostty"; }
-    Super+Space { spawn "wofi"; }
+    Super+Space { spawn "qs" "ipc" "call" "appLauncher" "open"; }
     Super+L { spawn "hyprlock"; }
-    Super+M { spawn "wlogout"; }
-    Super+V { spawn "sh" "-c" "cliphist list | wofi -S dmenu | cliphist decode | wl-copy"; }
+    Super+M { spawn "qs" "ipc" "call" "powerMenu" "open"; }
+    Super+V { spawn "qs" "ipc" "call" "clipboardPicker" "open"; }
+    Super+T { spawn "qs" "ipc" "call" "themeSwitcher" "open"; }
+    Super+W { spawn "qs" "ipc" "call" "wallpaperSwitcher" "open"; }
+    Super+Shift+W { spawn "qs" "ipc" "call" "wallpaperSwitcher" "random"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "-l" "1" "@DEFAULT_AUDIO_SINK@" "5%+"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "-l" "1" "@DEFAULT_AUDIO_SINK@" "5%-"; }
