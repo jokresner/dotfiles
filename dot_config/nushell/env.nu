@@ -41,4 +41,60 @@ create_cache carapace {
     $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense'; 
     ^carapace _carapace nushell | str replace '$env.config = $current' '$env.config = ($env.config? | default {} | merge $current)'
 }
-create_cache mise { ^mise activate nu }
+def --env apply_mise_env [mise_bin: string] {
+    let vars = (
+        ^$mise_bin hook-env -s nu
+        | from csv --noheaders --no-infer
+        | rename 'op' 'name' 'value'
+    )
+
+    for var in $vars {
+        if $var.op == "set" {
+            if ($var.name | str upcase) == "PATH" {
+                $env.PATH = ($var.value | split row (char esep))
+            } else {
+                load-env {($var.name): $var.value}
+            }
+        } else if $var.op == "hide" and $var.name in $env {
+            hide-env -i $var.name
+        }
+    }
+}
+
+def --env add-hook [field: cell-path new_hook: any] {
+    let field = $field | split cell-path | update optional true | into cell-path
+    let old_config = $env.config? | default {}
+    let old_hooks = $old_config | get $field | default []
+    $env.config = ($old_config | upsert $field ($old_hooks ++ [$new_hook]))
+}
+
+let mise_candidates = if ($nu.os-info.name == "macos") {
+    ["/opt/homebrew/bin/mise" "~/.local/bin/mise" "mise"]
+} else {
+    ["~/.local/bin/mise" "/home/linuxbrew/.linuxbrew/bin/mise" "mise"]
+}
+
+let mise_bin = (
+    $mise_candidates
+    | each {|candidate|
+        if $candidate == "mise" {
+            if (which mise | is-empty) { null } else { "mise" }
+        } else {
+            let expanded = ($candidate | path expand)
+            if ($expanded | path exists) { $expanded } else { null }
+        }
+    }
+    | compact
+    | get 0?
+)
+
+if $mise_bin != null {
+    $env.MISE_SHELL = "nu"
+    apply_mise_env $mise_bin
+    let mise_hook = {
+        condition: { "MISE_SHELL" in $env }
+        code: { apply_mise_env $mise_bin }
+    }
+    add-hook hooks.pre_prompt $mise_hook
+    add-hook hooks.env_change.PWD $mise_hook
+}

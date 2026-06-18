@@ -1,3 +1,5 @@
+default_shell "nu"
+
 // === THEME AND UI ===
 // theme "catppuccin-mocha"
 

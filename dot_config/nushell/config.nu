@@ -89,7 +89,10 @@ if ($nu.os-info.name == 'macos') {
 #----------------------
 
 $env.GCM_CREDENTIAL_STORE = "gpg"
-$env.GPG_TTY = (tty)
+let gpg_tty = (tty | complete)
+if $gpg_tty.exit_code == 0 {
+    $env.GPG_TTY = ($gpg_tty.stdout | str trim)
+}
 $env.EDITOR = "nvim"
 
 #----------------------
@@ -100,7 +103,6 @@ source $"($nu.cache-dir)/starship.nu"
 source $"($nu.cache-dir)/carapace.nu"
 source $"($nu.cache-dir)/zoxide.nu"
 source $"($nu.cache-dir)/atuin.nu"
-source $"($nu.cache-dir)/mise.nu"
 
 #--------
 # Scripts
