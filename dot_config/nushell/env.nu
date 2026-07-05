@@ -50,7 +50,7 @@ def --env apply_mise_env [mise_bin: string] {
 
     for var in $vars {
         if $var.op == "set" {
-            if ($var.name | str upcase) == "PATH" {
+            if ($var.name | str uppercase) == "PATH" {
                 $env.PATH = ($var.value | split row (char esep))
             } else {
                 load-env {($var.name): $var.value}
