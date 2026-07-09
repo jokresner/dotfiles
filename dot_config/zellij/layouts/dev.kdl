@@ -1,0 +1,80 @@
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="zjstatus" {
+                color_rosewater "#f5e0dc"
+                color_flamingo  "#f2cdcd"
+                color_pink      "#f5c2e7"
+                color_mauve     "#cba6f7"
+                color_red       "#f38ba8"
+                color_maroon    "#eba0ac"
+                color_peach     "#fab387"
+                color_yellow    "#f9e2af"
+                color_green     "#a6e3a1"
+                color_teal      "#94e2d5"
+                color_sky       "#89dceb"
+                color_sapphire  "#74c7ec"
+                color_blue      "#89b4fa"
+                color_lavender  "#b4befe"
+                color_text      "#cdd6f4"
+                color_subtext1  "#bac2de"
+                color_subtext0  "#a6adc8"
+                color_overlay2  "#9399b2"
+                color_overlay1  "#7f849c"
+                color_overlay0  "#6c7086"
+                color_surface2  "#585b70"
+                color_surface1  "#45475a"
+                color_surface0  "#313244"
+                color_base      "#1e1e2e"
+                color_mantle    "#181825"
+                color_crust     "#11111b"
+
+                format_left   "{mode} #[fg=$overlay0,bold]{session}"
+                format_center "{tabs}"
+                format_right  "#[fg=$overlay0,bold] {datetime}"
+                format_space  ""
+
+                border_enabled  "false"
+                border_char     "─"
+                border_format   "#[fg=$overlay0]{char}"
+                border_position "top"
+
+                mode_normal        "#[fg=$green]█"
+                mode_locked        "#[fg=$red]█"
+                mode_resize        "#[fg=$yellow]█"
+                mode_pane          "#[fg=$blue]█"
+                mode_tab           "#[fg=$yellow]█"
+                mode_scroll        "#[fg=$pink]█"
+                mode_enter_search  "#[fg=$blue]█"
+                mode_search        "#[fg=$blue]█"
+                mode_rename_tab    "#[fg=$blue]█"
+                mode_rename_pane   "#[fg=$blue]█"
+                mode_session       "#[fg=$blue]█"
+                mode_move          "#[fg=$blue]█"
+                mode_prompt        "#[fg=$blue]█"
+                mode_tmux          "#[fg=$pink]█"
+
+                tab_normal              "#[fg=$overlay0] {index}:{name} "
+                tab_active              "#[fg=$blue,bold]#[bg=$blue,fg=$base,bold]{index}:{name}#[fg=$blue,bold]"
+
+                tab_sync_indicator       "<> "
+                tab_fullscreen_indicator "[] "
+                tab_floating_indicator   "⬚ "
+
+                tab_separator           "  "
+
+                datetime        "{format} "
+                datetime_format "%H:%M"
+                datetime_timezone "Europe/Berlin"
+            }
+        }
+        children
+    }
+
+    tab name="code" {
+        pane split_direction="horizontal" {
+            pane command="nvim" size="75%"
+            pane size="25%"
+        }
+    }
+}

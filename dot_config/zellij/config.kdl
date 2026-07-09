@@ -1,7 +1,7 @@
-default_shell "nu"
-
 // === THEME AND UI ===
-// theme "catppuccin-mocha"
+theme "catppuccin-mocha"
+theme_dark "catppuccin-mocha"
+theme_light "catppuccin-latte"
 
 // === KEYBINDINGS ===
 keybinds {
@@ -27,9 +27,9 @@ keybinds {
             LaunchOrFocusPlugin "zsm" {
                 floating true
                 move_to_focused_tab true
-                default_layout "tabs"
+                default_layout "dev"
                 show_resurrectable_sessions true
-                base_paths "/home/johannes/Repos|/home/johannes"
+                base_paths "/home/johannes/Repos|/Users/johannes/Repos|/home/johannes|/Users/johannes"
             }
             SwitchToMode "normal"
         }
